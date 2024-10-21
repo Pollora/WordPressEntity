@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Entity;
+namespace Pollora\Entity;
 
-use Pollen\Entity\Traits\Entity;
+use Pollora\Entity\Traits\Entity;
 
 class Taxonomy extends Entity
 {

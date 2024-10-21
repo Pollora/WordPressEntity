@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Entity\Traits;
+namespace Pollora\Entity\Traits;
 
 /**
  * The ArgumentHelper class is a trait that provides methods to extract arguments from properties using getter methods.
@@ -10,7 +10,7 @@ namespace Pollen\Entity\Traits;
 trait ArgumentTranslater
 {
     /**
-     * Unused class. Need for the pollen framework.
+     * Unused class. Need for the pollora framework.
      */
     protected function translateArguments(array $args, string $entity, array $keyToTranslate = [
         'label',

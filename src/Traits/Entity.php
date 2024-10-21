@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Entity\Traits;
+namespace Pollora\Entity\Traits;
 
-use Pollen\Entity\Traits\ArgumentTranslater;
-use Pollen\WordPressArgs\ArgumentHelper;
+use Pollora\Entity\Traits\ArgumentTranslater;
+use Pollora\WordPressArgs\ArgumentHelper;
 
 /**
  * The ArgumentHelper class is a abstract that provides methods to extract arguments from properties using getter methods.
