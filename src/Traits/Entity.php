@@ -752,6 +752,7 @@ abstract class Entity
      */
     public function init()
     {
+        $this->setSlug($this->slug);
         $this->setSingular($this->singular);
         $this->setPlural($this->plural);
         $this->register();
@@ -788,7 +789,7 @@ abstract class Entity
     {
         $args = $this->buildArguments();
         $args['names'] = $this->getNames();
-        
+
         $args = $this->translateArguments($args, $this->entity);
         $names = $args['names'];
         unset($args['names']);
