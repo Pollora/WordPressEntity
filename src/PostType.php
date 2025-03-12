@@ -225,16 +225,6 @@ class PostType extends Entity
     public $archive;
 
     /**
-     * Force the use of the block editor for this post type. Must be used in
-     * combination with the `show_in_rest` argument.
-     *
-     * The primary use of this argument
-     * is to prevent the block editor from being used by setting it to false when
-     * `show_in_rest` is set to true.
-     */
-    public $blockEditor;
-
-    /**
      * Whether to show this post type on the 'Recently Published' section of the
      * admin dashboard.
      *
@@ -776,7 +766,7 @@ class PostType extends Entity
      */
     public function isBlockEditor(): ?bool
     {
-        return $this->blockEditor;
+        return $this->showInRest;
     }
 
     /**
@@ -786,7 +776,7 @@ class PostType extends Entity
      */
     public function enableBlockEditor(): self
     {
-        $this->blockEditor = true;
+        $this->showInRest = true;
 
         return $this;
     }
@@ -799,7 +789,7 @@ class PostType extends Entity
      */
     public function setBlockEditor(bool $blockEditor): self
     {
-        $this->blockEditor = $blockEditor;
+        $this->showInRest = $blockEditor;
 
         return $this;
     }
