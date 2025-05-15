@@ -1,0 +1,23 @@
+parameters:
+    level: 5
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - src/Infrastructure/Providers/LaravelEntityServiceProvider.php
+    ignoreErrors:
+        - '#Trying to invoke .* but it''s not a callable.#'
+        - '#Function [a-zA-Z_]+ not found.#'
+        - '#Call to method .* on an unknown class WP_REST_Controller.#'
+        - '#Call to static method .* on an unknown class WP_Taxonomies.#'
+        - '#Call to static method .* on an unknown class WP_Post_Type.#'
+        - '#Undefined variable: (\$this|.*)#'
+        - '#Expected type .* Found ''null''#'
+        - '#Access to an undefined property .*#'
+        - '#File ends with a trailing whitespace.#'
+        - '#Call to an undefined method Mockery.*#'
+        - '#Parameter .* of class .* constructor expects .*, Mockery.*#'
+        - '#Parameter \#1 \$callback of function call_user_func expects callable\(\): mixed, .*#'
+    scanDirectories:
+        - vendor
+    reportUnmatchedIgnoredErrors: false 
