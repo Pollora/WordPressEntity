@@ -496,7 +496,6 @@ class Taxonomy extends Entity
         public ?string $singular = null,
         public ?string $plural = null
     ) {
-        $this->init();
     }
 
     /**
@@ -511,6 +510,8 @@ class Taxonomy extends Entity
      */
     public static function make(string $slug, string|array $objectType, string $singular = null, string $plural = null): self
     {
-        return new static($slug, $objectType, $singular , $plural);
+        $instance = new static($slug, $objectType, $singular, $plural);
+        $instance->init();
+        return $instance;
     }
 }

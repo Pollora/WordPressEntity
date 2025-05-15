@@ -996,7 +996,6 @@ class PostType extends Entity
         public ?string $singular = null,
         public ?string $plural = null
     ) {
-        $this->init();
     }
 
     /**
@@ -1009,6 +1008,8 @@ class PostType extends Entity
      */
     public static function make(string $slug, string $singular = null, string $plural = null): self
     {
-        return new static($slug, $singular , $plural);
+        $instance = new static($slug, $singular, $plural);
+        $instance->init();
+        return $instance;
     }
 }

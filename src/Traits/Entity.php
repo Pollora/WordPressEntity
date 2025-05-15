@@ -755,7 +755,6 @@ abstract class Entity
         $this->setSlug($this->slug);
         $this->setSingular($this->singular);
         $this->setPlural($this->plural);
-        $this->register();
     }
 
     /**
@@ -767,24 +766,6 @@ abstract class Entity
      *
      * @return void
      */
-    public function register()
-    {
-        if (function_exists('register_post_type')) {
-            $this->registerEntityType();
-
-            return;
-        }
-
-        add_action('init', function () {
-            $this->registerEntityType();
-        }, 99);
-    }
-
-    /**
-     * Register the entity type.
-     *
-     * @return void
-     */
     public function registerEntityType()
     {
         $args = $this->buildArguments();
@@ -793,7 +774,6 @@ abstract class Entity
         $args = $this->translateArguments($args, $this->entity);
         $names = $args['names'];
         unset($args['names']);
-        //dd($args);
 
         if ($this->entity === 'taxonomies') {
             $this->registerTaxonomy($args, $names);
@@ -825,4 +805,5 @@ abstract class Entity
     {
         register_extended_post_type($this->slug, $args, $names);
     }
+
 }
