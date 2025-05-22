@@ -1,0 +1,35 @@
+parameters:
+    level: 5
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - vendor/*
+    ignoreErrors:
+        # WordPress function mocks in tests
+        - '#Function [a-zA-Z0-9\\_]+ not found#'
+        - '#Call to undefined function [a-zA-Z0-9\\_]+#'
+        # Mockery related errors
+        - '#Parameter \#\d+ \$[a-zA-Z0-9_]+ of class [^]]+ constructor expects [^,]+, Mockery\\(MockInterface|LegacyMockInterface)(\|[^,]+)* given.#'
+        - '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::[a-zA-Z0-9_]+\(\).#'
+        # Traits property access errors
+        - '#Access to an undefined property Pollora\\Entity\\Traits\\Entity::\$[a-zA-Z0-9_]+.#'
+        # WP specific classes
+        - '#(has invalid type|has unknown class) WP_REST_Controller#'
+        - '#Method .+::getRestController\(\) has invalid return type WP_REST_Controller.#'
+        # Null coalescence operator checks
+        - '#Expression on left side of \?\? is not nullable.#'
+        - '#Property .+ on left side of \?\? is not nullable.#'
+        # Unsafe usage of new static() - this is a valid pattern in this codebase
+        - '#Unsafe usage of new static\(\).#'
+        # Method returns in constructor - Legacy code
+        - '#Method .+::__construct\(\) with return type void returns .+ but should not return anything.#'
+        # Undefined methods in legacy code
+        - '#Call to an undefined method Pollora\\Entity\\(PostType|Taxonomy)::(init|registerEntityType)\(\).#'
+        # Properties only written, never read
+        - '#Property .+::\$[a-zA-Z0-9_]+ is never read, only written.#'
+        # PHPDoc issues
+        - '#PHPDoc tag @param references unknown parameter: \$[a-zA-Z0-9_]+#'
+        # Pest.php issues
+        - '#Undefined variable: \$this#'
+    reportUnmatchedIgnoredErrors: false 

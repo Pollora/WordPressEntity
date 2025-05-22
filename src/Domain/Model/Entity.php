@@ -2,10 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Pollora\Entity\Traits;
+namespace Pollora\Entity\Domain\Model;
+
+use Pollora\Entity\Shared\Traits\ArgumentTranslater;
 
 /**
- * The Entity class is an abstract that provides common functionality for WordPress entities.
+ * The Entity class is an abstract model that provides common functionality
+ * for WordPress entities like post types and taxonomies.
+ *
+ * This class is part of the Domain layer in the hexagonal architecture.
  */
 abstract class Entity
 {
@@ -642,6 +647,7 @@ abstract class Entity
      * Sets the value of the singular property.
      *
      * @param  string|null  $singular  The value to set for the singular property.
+     * @return self Returns the instance of the class.
      */
     public function setSingular(?string $singular): self
     {
@@ -728,6 +734,7 @@ abstract class Entity
      * Set the value of dashboard glance.
      *
      * @param  bool  $dashboardGlance  The new value for dashboard glance.
+     * @return self Returns this object instance.
      */
     public function setDashboardGlance(bool $dashboardGlance): self
     {
@@ -750,6 +757,7 @@ abstract class Entity
      * Sets the value of the adminCols property.
      *
      * @param  array  $adminCols  The value to set for the adminCols property.
+     * @return self Returns this object instance.
      */
     public function setAdminCols(array $adminCols): self
     {
@@ -759,221 +767,11 @@ abstract class Entity
     }
 
     /**
-     * Initializes the object by setting its singular and plural forms and registering it.
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $this->setSlug($this->slug);
-        $this->setSingular($this->singular);
-        $this->setPlural($this->plural);
-    }
-
-    /**
-     * Registers the entity type.
-     *
-     * This method is called during initialization to register the entity type.
-     * It adds an anonymous function to the 'init' action hook with a priority of 99.
-     * The anonymous function calls the 'registerEntityType' method.
-     *
-     * @return void
-     */
-    public function registerEntityType()
-    {
-        // Only register if WordPress functions are available
-        if (! function_exists('\\add_action')) {
-            if (function_exists('\\error_log')) {
-                \error_log('Cannot register entity: add_action function not available');
-            }
-
-            return;
-        }
-
-        // Store this instance in the static collection to prevent garbage collection
-        static::$instances[] = $this;
-
-        if (function_exists('\\error_log')) {
-            $entityType = $this->entity ?? 'unknown';
-            $slug = $this->slug ?? 'unknown';
-            \error_log("Adding entity to static collection: {$entityType} - {$slug}");
-        }
-
-        // Hook the actual registration to WordPress init hook
-        // Using global namespace for WordPress functions
-        \add_action('init', function () {
-            if (function_exists('\\error_log')) {
-                $entityType = $this->entity ?? 'unknown';
-                $slug = $this->slug ?? 'unknown';
-                \error_log("WordPress init hook triggered for: {$entityType} - {$slug}");
-            }
-
-            try {
-                $args = $this->buildArguments();
-                $args['names'] = $this->getNames();
-
-                $args = $this->translateArguments($args, $this->entity);
-                $names = $args['names'];
-                unset($args['names']);
-
-                if (function_exists('\\error_log')) {
-                    \error_log('Registration args: '.json_encode($args));
-                    \error_log('Registration names: '.json_encode($names));
-                }
-
-                if ($this->entity === 'taxonomies') {
-                    if (function_exists('\\error_log')) {
-                        \error_log("Registering taxonomy: {$this->slug}");
-                    }
-                    $this->registerTaxonomy($args, $names);
-                } else {
-                    if (function_exists('\\error_log')) {
-                        \error_log("Registering post type: {$this->slug}");
-                    }
-                    $this->registerPostType($args, $names);
-                }
-            } catch (\Exception $e) {
-                if (function_exists('\\error_log')) {
-                    \error_log('Error during entity registration: '.$e->getMessage());
-                }
-            }
-        }, 99);
-    }
-
-    /**
-     * Registers a custom taxonomy.
-     *
-     * @param  array  $args  The arguments for registering the taxonomy.
-     * @param  array  $names  The names for the taxonomy.
-     * @return void
-     */
-    public function registerTaxonomy($args, $names)
-    {
-        // Use global namespace for the function
-        if (function_exists('\\register_extended_taxonomy')) {
-            \register_extended_taxonomy($this->slug, $this->objectType, $args, $names);
-        }
-    }
-
-    /**
-     * Registers a custom post type using register_extended_post_type function
-     *
-     * @param  array  $args  An array of arguments for registering the post type
-     * @param  array  $names  An array of names for labeling the post type
-     * @return void
-     */
-    public function registerPostType($args, $names)
-    {
-        // Check if required WordPress functions exist
-        if (! function_exists('\\register_post_type') && ! function_exists('\\register_extended_post_type')) {
-            if (function_exists('\\error_log')) {
-                \error_log('Cannot register post type: Neither register_post_type nor register_extended_post_type functions are available');
-            }
-
-            return;
-        }
-
-        // Use global namespace for the function
-        if (function_exists('\\register_extended_post_type')) {
-            try {
-                if (function_exists('\\error_log')) {
-                    \error_log("Calling register_extended_post_type for {$this->slug} with args: ".json_encode($args));
-                    \error_log('Names: '.json_encode($names));
-                }
-
-                \register_extended_post_type($this->slug, $args, $names);
-
-                if (function_exists('\\error_log')) {
-                    \error_log("Successfully registered extended post type: {$this->slug}");
-                }
-            } catch (\Exception $e) {
-                if (function_exists('\\error_log')) {
-                    \error_log('Error registering extended post type: '.$e->getMessage());
-                }
-
-                // Fallback to standard WordPress function
-                $this->fallbackToStandardPostTypeRegistration($args, $names);
-            }
-        } else {
-            $this->fallbackToStandardPostTypeRegistration($args, $names);
-        }
-    }
-
-    /**
-     * Sets raw arguments to be passed directly to WordPress.
-     *
-     * This method allows you to specify arguments that will be merged with
-     * automatically generated arguments during registration.
-     *
-     * @param  array  $args  Raw arguments to pass to WordPress registration functions
-     */
-    public function setRawArgs(array $args): self
-    {
-        $this->rawArgs = $args;
-
-        return $this;
-    }
-
-    /**
-     * Gets the raw arguments.
-     */
-    public function getRawArgs(): array
-    {
-        return $this->rawArgs;
-    }
-
-    /**
-     * Fallback to standard WordPress post type registration if extended registration fails
-     *
-     * @param  array  $args  Arguments for post type
-     * @param  array  $names  Names for post type
-     * @return void
-     */
-    protected function fallbackToStandardPostTypeRegistration($args, $names)
-    {
-        if (function_exists('\\register_post_type')) {
-            try {
-                // Merge names into args
-                if (! empty($names)) {
-                    if (isset($names['singular'])) {
-                        $args['labels']['singular_name'] = $names['singular'];
-                    }
-                    if (isset($names['plural'])) {
-                        $args['labels']['name'] = $names['plural'];
-                    }
-                    if (isset($names['slug'])) {
-                        // Use the slug from names if provided
-                        $customSlug = $names['slug'];
-                    } else {
-                        $customSlug = $this->slug;
-                    }
-                } else {
-                    $customSlug = $this->slug;
-                }
-
-                if (function_exists('\\error_log')) {
-                    \error_log("Falling back to standard register_post_type for {$customSlug}");
-                }
-
-                \register_post_type($customSlug, $args);
-
-                if (function_exists('\\error_log')) {
-                    \error_log("Successfully registered standard post type: {$customSlug}");
-                }
-            } catch (\Exception $e) {
-                if (function_exists('\\error_log')) {
-                    \error_log('Error in fallback post type registration: '.$e->getMessage());
-                }
-            }
-        } elseif (function_exists('\\error_log')) {
-            \error_log('Cannot register post type: register_post_type function not available');
-        }
-    }
-
-    /**
      * Build arguments for entity registration.
+     *
+     * @return array Array of arguments to be used for entity registration
      */
-    protected function buildArguments(): array
+    public function buildArguments(): array
     {
         // Collect all properties that should be used in arguments
         $reflection = new \ReflectionClass($this);
@@ -982,7 +780,7 @@ abstract class Entity
         $args = [];
         foreach ($properties as $property) {
             // Skip properties that should not be in arguments
-            if (in_array($property->getName(), ['slug', 'singular', 'plural', 'objectType', 'names'])) {
+            if (in_array($property->getName(), ['slug', 'singular', 'plural', 'names'])) {
                 continue;
             }
 
@@ -993,6 +791,11 @@ abstract class Entity
             }
         }
 
+        // For taxonomies, include the objectType in the args
+        if ($this->getEntity() === 'taxonomies' && $this instanceof \Pollora\Entity\Domain\Model\Taxonomy) {
+            $args['object_type'] = $this->getObjectType();
+        }
+
         // Merge with raw arguments if any are set
         if (! empty($this->rawArgs)) {
             $args = array_merge($args, $this->rawArgs);
@@ -1000,4 +803,59 @@ abstract class Entity
 
         return $args;
     }
+
+    /**
+     * Sets raw arguments to be passed directly to WordPress.
+     *
+     * This method allows you to specify arguments that will be merged with
+     * automatically generated arguments during registration.
+     *
+     * @param  array  $args  Raw arguments to pass to WordPress registration functions
+     * @return self Returns this object instance.
+     */
+    public function setRawArgs(array $args): self
+    {
+        $this->rawArgs = $args;
+
+        return $this;
+    }
+
+    /**
+     * Gets the raw arguments.
+     *
+     * @return array Array of raw arguments
+     */
+    public function getRawArgs(): array
+    {
+        return $this->rawArgs;
+    }
+
+    /**
+     * Gets the entity type name.
+     *
+     * @return string The entity type name
+     */
+    public function getEntity(): string
+    {
+        return $this->entity;
+    }
+
+    /**
+     * Gets the slug of the entity.
+     *
+     * @return string The slug
+     */
+    public function getSlug(): string
+    {
+        return $this->names['slug'] ?? '';
+    }
+
+    /**
+     * Initializes the object by setting its singular and plural forms.
+     *
+     * This method must be implemented by concrete classes.
+     *
+     * @return void
+     */
+    abstract public function init();
 }

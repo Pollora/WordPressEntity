@@ -1,12 +1,12 @@
 {
     "name": "pollora/entity",
-    "description": "Create WordPress post type and taxonomy in a fluent way !",
+    "description": "A modern PHP package for WordPress custom post types and taxonomies",
+    "type": "library",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "Olivier Gorzalka",
-            "email": "olivier@amphibee.fr",
-            "role": "Developer"
+            "name": "Amphibee",
+            "email": "contact@amphibee.fr"
         }
     ],
     "require": {
@@ -14,10 +14,42 @@
         "pollora/wordpress-args": "dev-main",
         "johnbillion/extended-cpts": "^5.0"
     },
+    "require-dev": {
+        "laravel/pint": "^v1.22.1",
+        "mockery/mockery": "^2.0.x-dev",
+        "pestphp/pest": "^v3.8.2",
+        "phpstan/phpstan": "^2.1.16"
+    },
     "autoload": {
         "psr-4": {
             "Pollora\\Entity\\": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "autoload-dev": {
+        "psr-4": {
+            "Pollora\\Entity\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": [
+            "@test:unit",
+            "@phpstan",
+            "@lint:check"
+        ],
+        "test:coverage": "pest --coverage",
+        "test:unit": "pest --testsuite=Unit",
+        "test:feature": "pest --testsuite=Feature",
+        "phpstan": "phpstan analyse src tests --level=5",
+        "phpstan:ci": "phpstan analyse src tests --level=5 --no-progress",
+        "lint": "pint",
+        "lint:check": "pint --test"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
