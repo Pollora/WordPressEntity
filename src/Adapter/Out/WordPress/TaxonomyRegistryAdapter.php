@@ -31,10 +31,6 @@ class TaxonomyRegistryAdapter implements TaxonomyRegistryPort
         if (isset($args['object_type'])) {
             $this->registerTaxonomy($slug, $args['object_type'], $args, $names);
             unset($args['object_type']);
-        } else {
-            if (function_exists('\\error_log')) {
-                \error_log('Cannot register taxonomy: Missing object_type parameter');
-            }
         }
     }
 
@@ -53,21 +49,8 @@ class TaxonomyRegistryAdapter implements TaxonomyRegistryPort
         // Use global namespace for the function
         if (function_exists('\\register_extended_taxonomy')) {
             try {
-                if (function_exists('\\error_log')) {
-                    \error_log("Calling register_extended_taxonomy for {$slug} with object type: ".
-                              (is_array($objectType) ? implode(', ', $objectType) : $objectType));
-                }
-
                 \register_extended_taxonomy($slug, $objectType, $args, $names);
-
-                if (function_exists('\\error_log')) {
-                    \error_log("Successfully registered extended taxonomy: {$slug}");
-                }
             } catch (\Exception $e) {
-                if (function_exists('\\error_log')) {
-                    \error_log('Error registering extended taxonomy: '.$e->getMessage());
-                }
-
                 // Fallback to standard WordPress function
                 $this->fallbackToStandardTaxonomyRegistration($slug, $objectType, $args, $names);
             }
@@ -106,22 +89,9 @@ class TaxonomyRegistryAdapter implements TaxonomyRegistryPort
                     $customSlug = $slug;
                 }
 
-                if (function_exists('\\error_log')) {
-                    \error_log("Falling back to standard register_taxonomy for {$customSlug}");
-                }
-
                 \register_taxonomy($customSlug, $objectType, $args);
-
-                if (function_exists('\\error_log')) {
-                    \error_log("Successfully registered standard taxonomy: {$customSlug}");
-                }
             } catch (\Exception $e) {
-                if (function_exists('\\error_log')) {
-                    \error_log('Error in fallback taxonomy registration: '.$e->getMessage());
-                }
             }
-        } elseif (function_exists('\\error_log')) {
-            \error_log('Cannot register taxonomy: register_taxonomy function not available');
         }
     }
 }

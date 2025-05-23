@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pollora\Entity\Domain\Model;
 
-use Pollora\Entity\Shared\Traits\ArgumentTranslater;
+use Pollora\WordPressArgs\ArgumentHelper;
 
 /**
  * The Entity class is an abstract model that provides common functionality
@@ -14,7 +14,7 @@ use Pollora\Entity\Shared\Traits\ArgumentTranslater;
  */
 abstract class Entity
 {
-    use ArgumentTranslater;
+    use ArgumentHelper;
 
     /**
      * Name of the post type or taxonomy shown in the menu. Usually plural.
@@ -165,20 +165,9 @@ abstract class Entity
     public $names;
 
     /**
-     * Static collection to store entity instances to prevent garbage collection
-     * before registration happens.
-     */
-    protected static array $instances = [];
-
-    /**
      * The entity name, used for registration.
      */
     protected string $entity = '';
-
-    /**
-     * Raw arguments that will be passed directly to WordPress.
-     */
-    protected array $rawArgs = [];
 
     /**
      * Retrieves the label for the entity.
@@ -767,70 +756,6 @@ abstract class Entity
     }
 
     /**
-     * Build arguments for entity registration.
-     *
-     * @return array Array of arguments to be used for entity registration
-     */
-    public function buildArguments(): array
-    {
-        // Collect all properties that should be used in arguments
-        $reflection = new \ReflectionClass($this);
-        $properties = $reflection->getProperties(\ReflectionProperty::IS_PUBLIC);
-
-        $args = [];
-        foreach ($properties as $property) {
-            // Skip properties that should not be in arguments
-            if (in_array($property->getName(), ['slug', 'singular', 'plural', 'names'])) {
-                continue;
-            }
-
-            // Only include non-null properties
-            $name = $property->getName();
-            if (isset($this->$name)) {
-                $args[$name] = $this->$name;
-            }
-        }
-
-        // For taxonomies, include the objectType in the args
-        if ($this->getEntity() === 'taxonomies' && $this instanceof \Pollora\Entity\Domain\Model\Taxonomy) {
-            $args['object_type'] = $this->getObjectType();
-        }
-
-        // Merge with raw arguments if any are set
-        if (! empty($this->rawArgs)) {
-            $args = array_merge($args, $this->rawArgs);
-        }
-
-        return $args;
-    }
-
-    /**
-     * Sets raw arguments to be passed directly to WordPress.
-     *
-     * This method allows you to specify arguments that will be merged with
-     * automatically generated arguments during registration.
-     *
-     * @param  array  $args  Raw arguments to pass to WordPress registration functions
-     * @return self Returns this object instance.
-     */
-    public function setRawArgs(array $args): self
-    {
-        $this->rawArgs = $args;
-
-        return $this;
-    }
-
-    /**
-     * Gets the raw arguments.
-     *
-     * @return array Array of raw arguments
-     */
-    public function getRawArgs(): array
-    {
-        return $this->rawArgs;
-    }
-
-    /**
      * Gets the entity type name.
      *
      * @return string The entity type name
@@ -851,6 +776,32 @@ abstract class Entity
     }
 
     /**
+     * Translate the arguments using the given entity and keys.
+     *
+     * This is a stub implementation that returns arguments unchanged.
+     * Override this method in subclasses if translation is needed.
+     *
+     * @param  array<string, mixed>  $args  The arguments to be translated
+     * @param  string  $entity  The translation domain/entity to use
+     * @param  array<int, string>  $keyToTranslate  The keys to be translated
+     * @return array<string, mixed> The arguments (unchanged in this implementation)
+     */
+    public function translateArguments(
+        array $args,
+        string $entity,
+        array $keyToTranslate = [
+            'label',
+            'labels.*',
+            'names.singular',
+            'names.plural',
+        ]
+    ): array {
+        // Stub implementation - returns arguments unchanged
+        // This can be overridden in subclasses if translation is needed
+        return $args;
+    }
+
+    /**
      * Initializes the object by setting its singular and plural forms.
      *
      * This method must be implemented by concrete classes.
@@ -858,4 +809,14 @@ abstract class Entity
      * @return void
      */
     abstract public function init();
+
+    /**
+     * Get the arguments for the entity.
+     *
+     * @return array|null The arguments for the entity.
+     */
+    public function getArgs(): ?array
+    {
+        return $this->buildArguments();
+    }
 }

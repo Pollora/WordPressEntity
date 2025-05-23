@@ -124,7 +124,7 @@ test('can set and get args property', function () {
     ];
 
     $taxonomy->setArgs($args);
-    expect($taxonomy->getArgs())->toBe($args);
+    expect($taxonomy->getArgs()['args'])->toBe($args);
 });
 
 test('can set checked on top property', function () {
@@ -167,7 +167,7 @@ test('can build taxonomy arguments correctly', function () {
     $taxonomy->showInQuickEdit();
     $taxonomy->showTagcloud();
 
-    $args = $taxonomy->buildArguments();
+    $args = $taxonomy->getArgs();
 
     expect($args)->toBeArray()
         ->and($args)->toHaveKey('label')
@@ -178,12 +178,12 @@ test('can build taxonomy arguments correctly', function () {
         ->and($args['public'])->toBeTrue()
         ->and($args)->toHaveKey('hierarchical')
         ->and($args['hierarchical'])->toBeTrue()
-        ->and($args)->toHaveKey('showAdminColumn')
-        ->and($args['showAdminColumn'])->toBeTrue()
-        ->and($args)->toHaveKey('showInQuickEdit')
-        ->and($args['showInQuickEdit'])->toBeTrue()
-        ->and($args)->toHaveKey('showTagcloud')
-        ->and($args['showTagcloud'])->toBeTrue()
+        ->and($args)->toHaveKey('show_admin_column')
+        ->and($args['show_admin_column'])->toBeTrue()
+        ->and($args)->toHaveKey('show_in_quick_edit')
+        ->and($args['show_in_quick_edit'])->toBeTrue()
+        ->and($args)->toHaveKey('show_tagcloud')
+        ->and($args['show_tagcloud'])->toBeTrue()
         ->and($args)->toHaveKey('object_type')
         ->and($args['object_type'])->toBe('post');
 });

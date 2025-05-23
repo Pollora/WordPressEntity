@@ -34,6 +34,11 @@ class ConcreteEntity extends Entity
     {
         return parent::getSlug();
     }
+
+    public function getArgs(): ?array
+    {
+        return $this->buildArguments();
+    }
 }
 
 // Tests for the Entity class
@@ -91,7 +96,7 @@ test('can build arguments', function () {
     $entity->setDescription('Test Description');
     $entity->public();
 
-    $args = $entity->buildArguments();
+    $args = $entity->getArgs();
 
     expect($args)->toBeArray()
         ->and($args)->toHaveKey('label')
@@ -131,7 +136,7 @@ test('can set and get raw arguments', function () {
 
     // Check that raw args are merged in buildArguments
     $entity->setLabel('Test Label');
-    $args = $entity->buildArguments();
+    $args = $entity->getArgs();
 
     expect($args)->toHaveKey('custom_arg')
         ->and($args['custom_arg'])->toBe('custom_value')

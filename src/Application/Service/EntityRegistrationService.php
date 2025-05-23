@@ -40,43 +40,21 @@ class EntityRegistrationService
      */
     public function registerEntity(Entity $entity): void
     {
-        // Check if WordPress functions are available
-        if (! function_exists('\\add_action')) {
-            if (function_exists('\\error_log')) {
-                \error_log('Cannot register entity: add_action function not available');
-            }
-
-            return;
-        }
-
         // Hook the actual registration to WordPress init hook
         \add_action('init', function () use ($entity) {
             $entityType = $entity->getEntity() ?? 'unknown';
             $slug = $entity->getSlug() ?? 'unknown';
 
-            if (function_exists('\\error_log')) {
-                \error_log("WordPress init hook triggered for: {$entityType} - {$slug}");
-            }
+            $args = $entity->getArgs();
 
-            try {
-                $args = $entity->buildArguments();
-                $args['names'] = $entity->getNames();
+            $args['names'] = $entity->getNames();
 
-                $args = $entity->translateArguments($args, $entity->getEntity());
-                $names = $args['names'] ?? [];
-                unset($args['names']);
+            $args = $entity->translateArguments($args, $entity->getEntity());
+            $names = $args['names'] ?? [];
+            unset($args['names']);
 
-                if (function_exists('\\error_log')) {
-                    \error_log('Registration args: '.json_encode($args));
-                    \error_log('Registration names: '.json_encode($names));
-                }
+            $this->entityRegistry->register($entity->getSlug(), $args, $names);
 
-                $this->entityRegistry->register($entity->getSlug(), $args, $names);
-            } catch (\Exception $e) {
-                if (function_exists('\\error_log')) {
-                    \error_log('Error during entity registration: '.$e->getMessage());
-                }
-            }
         }, 99);
     }
 }

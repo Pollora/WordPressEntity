@@ -460,16 +460,6 @@ class Taxonomy extends Entity
     }
 
     /**
-     * Get the arguments for the method.
-     *
-     * @return array|null The arguments for the method.
-     */
-    public function getArgs(): ?array
-    {
-        return $this->args;
-    }
-
-    /**
      * Set the arguments for the taxonomy.
      *
      * @param  array|null  $args  The arguments for the taxonomy.

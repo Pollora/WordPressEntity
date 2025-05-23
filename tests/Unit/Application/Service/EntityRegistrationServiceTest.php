@@ -38,6 +38,12 @@ class TestEntity extends Entity
         ];
     }
 
+    // Add getArgs method
+    public function getArgs(): ?array
+    {
+        return $this->buildArguments();
+    }
+
     // Ensure getSlug returns a value
     public function getSlug(): string
     {
@@ -55,7 +61,7 @@ class TestEntityRegistrationService extends EntityRegistrationService
         $slug = $entity->getSlug() ?? 'unknown';
 
         try {
-            $args = $entity->buildArguments();
+            $args = $entity->getArgs();
             $names = $entity->getNames();
 
             $this->getEntityRegistry()->register($entity->getSlug(), $args, $names);
@@ -127,7 +133,7 @@ test('handles errors during registration', function () {
             $slug = $entity->getSlug() ?? 'unknown';
 
             try {
-                $args = $entity->buildArguments();
+                $args = $entity->getArgs();
                 $names = $entity->getNames();
 
                 $this->getEntityRegistry()->register($entity->getSlug(), $args, $names);

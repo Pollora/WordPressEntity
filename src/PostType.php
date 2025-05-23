@@ -6,7 +6,6 @@ namespace Pollora\Entity;
 
 use Pollora\Entity\Adapter\Out\WordPress\PostTypeRegistryAdapter;
 use Pollora\Entity\Application\Service\EntityRegistrationService;
-use Pollora\Entity\Application\Service\PostTypeService;
 use Pollora\Entity\Domain\Model\PostType as PostTypeDomain;
 
 /**
@@ -27,12 +26,17 @@ class PostType
      */
     public static function make(string $slug, ?string $singular = null, ?string $plural = null): PostTypeDomain
     {
-        // Create the adapter and services
-        $postTypeRegistry = new PostTypeRegistryAdapter;
-        $registrationService = new EntityRegistrationService($postTypeRegistry);
-        $postTypeService = new PostTypeService($postTypeRegistry, $registrationService);
+        // Create the domain model directly with the slug
+        $postType = new PostTypeDomain($slug, $singular, $plural);
 
-        // Create and register the post type
-        return $postTypeService->createPostType($slug, $singular, $plural);
+        // Initialize the post type (this sets defaults)
+        $postType->init();
+
+        // Auto-register with WordPress using the entity registration service
+        $registry = new PostTypeRegistryAdapter;
+        $registrationService = new EntityRegistrationService($registry);
+        $registrationService->registerEntity($postType);
+
+        return $postType;
     }
 }

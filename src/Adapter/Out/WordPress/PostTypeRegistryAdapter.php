@@ -41,31 +41,14 @@ class PostTypeRegistryAdapter implements PostTypeRegistryPort
     {
         // Check if required WordPress functions exist
         if (! function_exists('\\register_post_type') && ! function_exists('\\register_extended_post_type')) {
-            if (function_exists('\\error_log')) {
-                \error_log('Cannot register post type: Neither register_post_type nor register_extended_post_type functions are available');
-            }
-
             return;
         }
 
         // Use global namespace for the function
         if (function_exists('\\register_extended_post_type')) {
             try {
-                if (function_exists('\\error_log')) {
-                    \error_log("Calling register_extended_post_type for {$slug} with args: ".json_encode($args));
-                    \error_log('Names: '.json_encode($names));
-                }
-
                 \register_extended_post_type($slug, $args, $names);
-
-                if (function_exists('\\error_log')) {
-                    \error_log("Successfully registered extended post type: {$slug}");
-                }
             } catch (\Exception $e) {
-                if (function_exists('\\error_log')) {
-                    \error_log('Error registering extended post type: '.$e->getMessage());
-                }
-
                 // Fallback to standard WordPress function
                 $this->fallbackToStandardPostTypeRegistration($slug, $args, $names);
             }
@@ -103,22 +86,9 @@ class PostTypeRegistryAdapter implements PostTypeRegistryPort
                     $customSlug = $slug;
                 }
 
-                if (function_exists('\\error_log')) {
-                    \error_log("Falling back to standard register_post_type for {$customSlug}");
-                }
-
                 \register_post_type($customSlug, $args);
-
-                if (function_exists('\\error_log')) {
-                    \error_log("Successfully registered standard post type: {$customSlug}");
-                }
             } catch (\Exception $e) {
-                if (function_exists('\\error_log')) {
-                    \error_log('Error in fallback post type registration: '.$e->getMessage());
-                }
             }
-        } elseif (function_exists('\\error_log')) {
-            \error_log('Cannot register post type: register_post_type function not available');
         }
     }
 }

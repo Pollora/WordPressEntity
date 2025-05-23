@@ -143,7 +143,7 @@ test('can build post type arguments correctly', function () {
     $postType->setMenuPosition(25);
     $postType->supports(['title', 'editor', 'thumbnail']);
 
-    $args = $postType->buildArguments();
+    $args = $postType->getArgs();
 
     expect($args)->toBeArray()
         ->and($args)->toHaveKey('label')
@@ -152,12 +152,12 @@ test('can build post type arguments correctly', function () {
         ->and($args['description'])->toBe('A test post type')
         ->and($args)->toHaveKey('public')
         ->and($args['public'])->toBeTrue()
-        ->and($args)->toHaveKey('hasArchive')
-        ->and($args['hasArchive'])->toBeTrue()
-        ->and($args)->toHaveKey('menuIcon')
-        ->and($args['menuIcon'])->toBe('dashicons-admin-post')
-        ->and($args)->toHaveKey('menuPosition')
-        ->and($args['menuPosition'])->toBe(25)
+        ->and($args)->toHaveKey('has_archive')
+        ->and($args['has_archive'])->toBeTrue()
+        ->and($args)->toHaveKey('menu_icon')
+        ->and($args['menu_icon'])->toBe('dashicons-admin-post')
+        ->and($args)->toHaveKey('menu_position')
+        ->and($args['menu_position'])->toBe(25)
         ->and($args)->toHaveKey('supports')
         ->and($args['supports'])->toBe(['title', 'editor', 'thumbnail']);
 });
