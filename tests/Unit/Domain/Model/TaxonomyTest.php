@@ -32,11 +32,11 @@ test('can set and get taxonomy specific properties', function () {
     $taxonomy = new Taxonomy('test-taxonomy', 'post');
 
     // Test tagcloud settings
-    $taxonomy->showTagcloud();
-    expect($taxonomy->isShowTagcloud())->toBeTrue();
+    $taxonomy->showTagCloud();
+    expect($taxonomy->isShowTagCloud())->toBeTrue();
 
-    $taxonomy->setShowTagcloud(false);
-    expect($taxonomy->isShowTagcloud())->toBeFalse();
+    $taxonomy->setShowTagCloud(false);
+    expect($taxonomy->isShowTagCloud())->toBeFalse();
 
     // Test quick edit settings
     $taxonomy->showInQuickEdit();
@@ -165,7 +165,7 @@ test('can build taxonomy arguments correctly', function () {
     $taxonomy->hierarchical();
     $taxonomy->showAdminColumn();
     $taxonomy->showInQuickEdit();
-    $taxonomy->showTagcloud();
+    $taxonomy->showTagCloud();
 
     $args = $taxonomy->getArgs();
 

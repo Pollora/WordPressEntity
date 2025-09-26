@@ -114,5 +114,3 @@ if (! function_exists('sanitize_text_field')) {
     }
 }
 
-// Load the file with functions in the ExtCPTs namespace
-require_once __DIR__.'/ext_cpts_helpers.php';

@@ -19,9 +19,9 @@ class PostTypeRegistryAdapter implements PostTypeRegistryPort
      *
      * This is a generic method that delegates to the specific post type registration method.
      *
-     * @param string $slug The entity slug
-     * @param array $args Registration arguments
-     * @param array $names Entity names (singular, plural)
+     * @param  string  $slug  The entity slug
+     * @param  array  $args  Registration arguments
+     * @param  array  $names  Entity names (singular, plural)
      */
     public function register(string $slug, array $args, array $names): void
     {
@@ -33,14 +33,14 @@ class PostTypeRegistryAdapter implements PostTypeRegistryPort
      *
      * Uses register_extended_post_type if available, or falls back to register_post_type.
      *
-     * @param string $slug The post type slug
-     * @param array $args Registration arguments
-     * @param array $names Post type names (singular, plural)
+     * @param  string  $slug  The post type slug
+     * @param  array  $args  Registration arguments
+     * @param  array  $names  Post type names (singular, plural)
      */
     public function registerPostType(string $slug, array $args, array $names): void
     {
         // Check if required WordPress functions exist
-        if (!function_exists('\\register_post_type') && !function_exists('\\register_extended_post_type')) {
+        if (! function_exists('\\register_post_type') && ! function_exists('\\register_extended_post_type')) {
             return;
         }
 
@@ -55,18 +55,18 @@ class PostTypeRegistryAdapter implements PostTypeRegistryPort
     /**
      * Fallback to standard WordPress post type registration if extended registration fails
      *
-     * @param string $slug Post type slug
-     * @param array $args Arguments for post type
-     * @param array $names Names for post type
+     * @param  string  $slug  Post type slug
+     * @param  array  $args  Arguments for post type
+     * @param  array  $names  Names for post type
      */
     protected function fallbackToStandardPostTypeRegistration(string $slug, array $args, array $names): void
     {
-        if (!function_exists('\\register_post_type')) {
+        if (! function_exists('\\register_post_type')) {
             throw new \Exception('register_post_type function not found.');
         }
 
         // Merge names into args
-        if (!empty($names)) {
+        if (! empty($names)) {
             if (isset($names['singular'])) {
                 $args['labels']['singular_name'] = $names['singular'];
             }

@@ -1,75 +1,77 @@
 # Pollora Entity WordPress Package
 
-A modern PHP 8.2+ library for easily managing WordPress custom post types and taxonomies with a hexagonal architecture.
+A modern PHP 8.2+ library for easily managing WordPress custom post types and taxonomies with a fluent interface and hexagonal architecture.
 
-## Test Structure
+## Features
 
-The unit tests use PestPHP and simulate WordPress functions to test the code without requiring a complete WordPress installation.
+- 🚀 Modern PHP 8.2+ with type declarations
+- 🏗️ Fluent interface for easy configuration
+- 🔧 Built on top of [Extended CPTs](https://github.com/johnbillion/extended-cpts) library
+- 📐 Hexagonal architecture for better separation of concerns
+- 🧪 Fully tested with PestPHP
+- 💡 Intuitive method naming with dedicated methods for boolean properties
 
-### WordPress Mocks
+## Installation
 
-WordPress mocks are organized as follows:
+```bash
+composer require pollora/entity
+```
 
-1. `tests/helpers.php`: Global WordPress functions (global namespace)
-2. `tests/ext_cpts_helpers.php`: Functions in the `ExtCPTs` namespace
+## Documentation
 
-#### `helpers.php` File
+- [Post Types Documentation](docs/post-types.md) - Complete guide for creating and configuring custom post types
+- [Taxonomies Documentation](docs/taxonomies.md) - Complete guide for creating and configuring custom taxonomies
 
-This file contains simulations of global WordPress functions such as:
-- `add_action` (to intercept and execute callbacks)
-- `register_post_type` and `register_taxonomy`
-- `register_extended_post_type` and `register_extended_taxonomy`
-- `is_admin`
-- `did_action`
-- `apply_filters`
-- etc.
+## Quick Start
 
-#### `ext_cpts_helpers.php` File
-
-This file contains simulations of WordPress functions in the `ExtCPTs` namespace used by the `johnbillion/extended-cpts` library:
-- `ExtCPTs\apply_filters`
-- `ExtCPTs\add_filter`
-- `ExtCPTs\get_post_type_object`
-- `ExtCPTs\get_taxonomies`
-- `ExtCPTs\get_post_types`
-- `ExtCPTs\is_wp_error`
-- `ExtCPTs\do_action`
-- etc.
-
-### Bootstrap
-
-The `tests/bootstrap.php` file loads the Composer autoloader, test helpers, and configures Mockery.
-
-## Code Structure
-
-The hexagonal architecture used here separates the code into three layers:
-
-1. **Domain**: Domain models (Entity, PostType, Taxonomy)
-2. **Application**: Application services that orchestrate operations
-3. **Adapter**: Adapters that allow interaction with WordPress
-
-The Domain layer is at the center and doesn't depend on any other layer. It defines ports (interfaces) that the adapters implement.
-
-The Application layer uses these interfaces to interact with the outside world, without knowing the implementation details.
-
-## Usage
+### Post Types
 
 ```php
-// Creating and registering a custom post type
 use Pollora\Entity\PostType;
 
 PostType::make('book', 'Book', 'Books')
-    ->setPublic(true)
-    ->setHasArchive(true)
-    ->setSupports(['title', 'editor', 'thumbnail'])
-    ->setMenuIcon('dashicons-book-alt')
-    ->register();
+    ->public()
+    ->showInRest()
+    ->hasArchive()
+    ->supports(['title', 'editor', 'thumbnail'])
+    ->menuIcon('dashicons-book-alt');
+```
 
-// Creating and registering a taxonomy
+### Taxonomies
+
+```php
 use Pollora\Entity\Taxonomy;
 
 Taxonomy::make('genre', 'book', 'Genre', 'Genres')
-    ->setHierarchical(true)
-    ->setShowInRest(true)
-    ->register();
-``` 
+    ->hierarchical()
+    ->showInRest()
+    ->showInQuickEdit();
+```
+
+## Architecture
+
+This package follows hexagonal architecture principles:
+
+1. **Domain Layer**: Core business logic (Entity, PostType, Taxonomy)
+2. **Application Layer**: Services that orchestrate operations
+3. **Adapter Layer**: WordPress integration adapters
+
+The Domain layer remains independent of external dependencies, defining interfaces (ports) that adapters implement.
+
+## Testing
+
+The package includes comprehensive unit tests using PestPHP with WordPress function mocks:
+
+```bash
+composer test
+```
+
+### Test Structure
+
+- `tests/helpers.php`: Global WordPress function mocks
+- `tests/ext_cpts_helpers.php`: Extended CPTs namespace function mocks
+- `tests/bootstrap.php`: Test environment setup
+
+## License
+
+This package is open-source software licensed under the MIT license. 

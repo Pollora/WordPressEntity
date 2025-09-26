@@ -316,9 +316,9 @@ class PostType extends Entity
      */
     public function init(): void
     {
-        $this->setSlug($this->slug);
-        $this->setSingular($this->singular);
-        $this->setPlural($this->plural);
+        $this->slug($this->slug);
+        $this->singular($this->singular);
+        $this->plural($this->plural);
     }
 
     /**
@@ -364,16 +364,40 @@ class PostType extends Entity
     }
 
     /**
+     * Include this post type in search results.
+     *
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function includeInSearch(): self
+    {
+        $this->excludeFromSearch = false;
+
+        return $this;
+    }
+
+    /**
      * Set whether the posts should be excluded from search.
      *
      * @param  bool|null  $excludeFromSearch  Determines if the item should be excluded from search. Set to null to unset.
      * @return self Returns the current object instance to allow method chaining.
      */
-    public function setExcludeFromSearch(?bool $excludeFromSearch): self
+    public function withExcludeFromSearch(?bool $excludeFromSearch): self
     {
         $this->excludeFromSearch = $excludeFromSearch;
 
         return $this;
+    }
+
+    /**
+     * Set whether the posts should be excluded from search.
+     *
+     * @deprecated Use withExcludeFromSearch() instead
+     * @param  bool|null  $excludeFromSearch  Determines if the item should be excluded from search. Set to null to unset.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function setExcludeFromSearch(?bool $excludeFromSearch): self
+    {
+        return $this->withExcludeFromSearch($excludeFromSearch);
     }
 
     /**
@@ -389,16 +413,52 @@ class PostType extends Entity
     }
 
     /**
+     * Set the post type as hierarchical (like pages).
+     *
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function hierarchical(): self
+    {
+        $this->hierarchical = true;
+
+        return $this;
+    }
+
+    /**
+     * Set the post type as non-hierarchical (like posts).
+     *
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function nonHierarchical(): self
+    {
+        $this->hierarchical = false;
+
+        return $this;
+    }
+
+    /**
      * Set whether the hierarchical property should be enabled or not.
      *
      * @param  bool  $hierarchical  Whether the hierarchical property should be enabled or not.
      * @return self Returns the current object instance to allow method chaining.
      */
-    public function setHierarchical(bool $hierarchical): self
+    public function withHierarchical(bool $hierarchical): self
     {
         $this->hierarchical = $hierarchical;
 
         return $this;
+    }
+
+    /**
+     * Set whether the hierarchical property should be enabled or not.
+     *
+     * @deprecated Use withHierarchical() instead
+     * @param  bool  $hierarchical  Whether the hierarchical property should be enabled or not.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function setHierarchical(bool $hierarchical): self
+    {
+        return $this->withHierarchical($hierarchical);
     }
 
     /**
@@ -424,16 +484,40 @@ class PostType extends Entity
     }
 
     /**
+     * Hide this post type from the admin bar.
+     *
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function hideFromAdminBar(): self
+    {
+        $this->showInAdminBar = false;
+
+        return $this;
+    }
+
+    /**
      * Set whether to show the object in the admin bar.
      *
      * @param  bool|null  $showInAdminBar  Set to true to show the object in the admin bar, false to hide it, or null to inherit the value from the parent object.
      * @return self Returns the current object instance to allow method chaining.
      */
-    public function setShowInAdminBar(?bool $showInAdminBar): self
+    public function withShowInAdminBar(?bool $showInAdminBar): self
     {
         $this->showInAdminBar = $showInAdminBar;
 
         return $this;
+    }
+
+    /**
+     * Set whether to show the object in the admin bar.
+     *
+     * @deprecated Use withShowInAdminBar() instead
+     * @param  bool|null  $showInAdminBar  Set to true to show the object in the admin bar, false to hide it, or null to inherit the value from the parent object.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function setShowInAdminBar(?bool $showInAdminBar): self
+    {
+        return $this->withShowInAdminBar($showInAdminBar);
     }
 
     /**
@@ -452,11 +536,23 @@ class PostType extends Entity
      * @param  int|null  $menuPosition  The menu position to set.
      * @return self Returns the current object instance to allow method chaining.
      */
-    public function setMenuPosition(?int $menuPosition): self
+    public function menuPosition(?int $menuPosition): self
     {
         $this->menuPosition = $menuPosition;
 
         return $this;
+    }
+
+    /**
+     * Set the menu position.
+     *
+     * @deprecated Use menuPosition() instead
+     * @param  int|null  $menuPosition  The menu position to set.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function setMenuPosition(?int $menuPosition): self
+    {
+        return $this->menuPosition($menuPosition);
     }
 
     /**
@@ -475,11 +571,23 @@ class PostType extends Entity
      * @param  string|null  $menuIcon  The menu icon to set.
      * @return self Returns the current object instance to allow method chaining.
      */
-    public function setMenuIcon(?string $menuIcon): self
+    public function menuIcon(?string $menuIcon): self
     {
         $this->menuIcon = $menuIcon;
 
         return $this;
+    }
+
+    /**
+     * Set the menu icon.
+     *
+     * @deprecated Use menuIcon() instead
+     * @param  string|null  $menuIcon  The menu icon to set.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function setMenuIcon(?string $menuIcon): self
+    {
+        return $this->menuIcon($menuIcon);
     }
 
     /**
@@ -498,11 +606,23 @@ class PostType extends Entity
      * @param  string  $capabilityType  The capability type to set.
      * @return self Returns the current object instance to allow method chaining.
      */
-    public function setCapabilityType(string $capabilityType): self
+    public function capabilityType(string $capabilityType): self
     {
         $this->capabilityType = $capabilityType;
 
         return $this;
+    }
+
+    /**
+     * Set the capability type.
+     *
+     * @deprecated Use capabilityType() instead
+     * @param  string  $capabilityType  The capability type to set.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function setCapabilityType(string $capabilityType): self
+    {
+        return $this->capabilityType($capabilityType);
     }
 
     /**
@@ -533,16 +653,40 @@ class PostType extends Entity
     }
 
     /**
+     * Disable meta capability mapping.
+     *
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function withoutMetaCap(): self
+    {
+        $this->mapMetaCap = false;
+
+        return $this;
+    }
+
+    /**
      * Set the value of mapMetaCap property.
      *
      * @param  bool  $mapMetaCap  The boolean value indicating if the map capability should be mapped to meta capabilities.
      * @return self Returns the current object instance to allow method chaining.
      */
-    public function setMapMetaCap(bool $mapMetaCap): self
+    public function withMapMetaCap(bool $mapMetaCap): self
     {
         $this->mapMetaCap = $mapMetaCap;
 
         return $this;
+    }
+
+    /**
+     * Set the value of mapMetaCap property.
+     *
+     * @deprecated Use withMapMetaCap() instead
+     * @param  bool  $mapMetaCap  The boolean value indicating if the map capability should be mapped to meta capabilities.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function setMapMetaCap(bool $mapMetaCap): self
+    {
+        return $this->withMapMetaCap($mapMetaCap);
     }
 
     /**
@@ -561,11 +705,23 @@ class PostType extends Entity
      * @param  callable|null  $registerMetaBoxCb  The callback function for registering a meta box.
      * @return self Returns an instance of the object.
      */
-    public function setRegisterMetaBoxCb(?callable $registerMetaBoxCb): self
+    public function registerMetaBoxCb(?callable $registerMetaBoxCb): self
     {
         $this->registerMetaBoxCb = $registerMetaBoxCb;
 
         return $this;
+    }
+
+    /**
+     * Sets the callback function for registering a meta box.
+     *
+     * @deprecated Use registerMetaBoxCb() instead
+     * @param  callable|null  $registerMetaBoxCb  The callback function for registering a meta box.
+     * @return self Returns an instance of the object.
+     */
+    public function setRegisterMetaBoxCb(?callable $registerMetaBoxCb): self
+    {
+        return $this->registerMetaBoxCb($registerMetaBoxCb);
     }
 
     /**
@@ -586,11 +742,23 @@ class PostType extends Entity
      * @param  array  $taxonomies  An array of taxonomies to set.
      * @return self Returns itself after setting the taxonomies.
      */
-    public function setTaxonomies(array $taxonomies): self
+    public function taxonomies(array $taxonomies): self
     {
         $this->taxonomies = $taxonomies;
 
         return $this;
+    }
+
+    /**
+     * Set the taxonomies for this object.
+     *
+     * @deprecated Use taxonomies() instead
+     * @param  array  $taxonomies  An array of taxonomies to set.
+     * @return self Returns itself after setting the taxonomies.
+     */
+    public function setTaxonomies(array $taxonomies): self
+    {
+        return $this->taxonomies($taxonomies);
     }
 
     /**
@@ -639,16 +807,40 @@ class PostType extends Entity
     }
 
     /**
+     * Prevent this post type from being exported.
+     *
+     * @return self The current object instance.
+     */
+    public function cannotExport(): self
+    {
+        $this->canExport = false;
+
+        return $this;
+    }
+
+    /**
      * Sets the flag indicating whether the content can be exported or not.
      *
      * @param  bool  $canExport  The flag indicating whether the content can be exported.
      * @return self Returns the modified object.
      */
-    public function setCanExport(bool $canExport): self
+    public function withCanExport(bool $canExport): self
     {
         $this->canExport = $canExport;
 
         return $this;
+    }
+
+    /**
+     * Sets the flag indicating whether the content can be exported or not.
+     *
+     * @deprecated Use withCanExport() instead
+     * @param  bool  $canExport  The flag indicating whether the content can be exported.
+     * @return self Returns the modified object.
+     */
+    public function setCanExport(bool $canExport): self
+    {
+        return $this->withCanExport($canExport);
     }
 
     /**
@@ -664,13 +856,36 @@ class PostType extends Entity
     }
 
     /**
-     * Marks the item for deletion with the user.
+     * Delete posts of this type when deleting a user.
      *
+     * @return self Returns the current object instance.
+     */
+    public function deleteWithUser(): self
+    {
+        $this->deleteWithUser = true;
+
+        return $this;
+    }
+
+    /**
+     * Alias for deleteWithUser() for backward compatibility.
+     *
+     * @deprecated Use deleteWithUser() instead
      * @return self Returns the current object instance.
      */
     public function deletedWithUser(): self
     {
-        $this->deleteWithUser = true;
+        return $this->deleteWithUser();
+    }
+
+    /**
+     * Keep posts of this type when deleting a user.
+     *
+     * @return self Returns the current object instance.
+     */
+    public function keepOnUserDelete(): self
+    {
+        $this->deleteWithUser = false;
 
         return $this;
     }
@@ -679,6 +894,20 @@ class PostType extends Entity
      * Sets whether the deletion of the object should be performed with the user.
      *
      * @param  bool|null  $deleteWithUser  Whether the deletion should be performed with the user.
+     * @return self Returns the modified object.
+     */
+    public function withDeleteWithUser(?bool $deleteWithUser): self
+    {
+        $this->deleteWithUser = $deleteWithUser;
+
+        return $this;
+    }
+
+    /**
+     * Sets whether the deletion of the object should be performed with the user.
+     *
+     * @deprecated Use withDeleteWithUser() instead
+     * @param  bool|null  $deleteWithUser  Whether the deletion should be performed with the user.
      *                                     True if deletion should be performed with the user,
      *                                     false if not, and null if it should be determined
      *                                     based on system configuration.
@@ -686,9 +915,7 @@ class PostType extends Entity
      */
     public function setDeleteWithUser(?bool $deleteWithUser): self
     {
-        $this->deleteWithUser = $deleteWithUser;
-
-        return $this;
+        return $this->withDeleteWithUser($deleteWithUser);
     }
 
     /**
@@ -707,11 +934,23 @@ class PostType extends Entity
      * @param  \WP_REST_Controller  $restController  The REST controller to set.
      * @return self Returns the updated instance of the object.
      */
-    public function setRestController(\WP_REST_Controller $restController): self
+    public function restController(\WP_REST_Controller $restController): self
     {
         $this->restController = $restController;
 
         return $this;
+    }
+
+    /**
+     * Sets the REST controller.
+     *
+     * @deprecated Use restController() instead
+     * @param  \WP_REST_Controller  $restController  The REST controller to set.
+     * @return self Returns the updated instance of the object.
+     */
+    public function setRestController(\WP_REST_Controller $restController): self
+    {
+        return $this->restController($restController);
     }
 
     /**
@@ -730,11 +969,23 @@ class PostType extends Entity
      * @param  array  $template  The template to set.
      * @return self Returns the object itself for method chaining.
      */
-    public function setTemplate(array $template): self
+    public function template(array $template): self
     {
         $this->template = $template;
 
         return $this;
+    }
+
+    /**
+     * Sets the template for the object.
+     *
+     * @deprecated Use template() instead
+     * @param  array  $template  The template to set.
+     * @return self Returns the object itself for method chaining.
+     */
+    public function setTemplate(array $template): self
+    {
+        return $this->template($template);
     }
 
     /**
@@ -756,11 +1007,23 @@ class PostType extends Entity
      * @param  bool|string  $templateLock  The template lock value to set. This can be either a boolean or a string.
      * @return self Returns the instance of the object.
      */
-    public function setTemplateLock(bool|string $templateLock): self
+    public function templateLock(bool|string $templateLock): self
     {
         $this->templateLock = $templateLock;
 
         return $this;
+    }
+
+    /**
+     * Sets the template lock for the object.
+     *
+     * @deprecated Use templateLock() instead
+     * @param  bool|string  $templateLock  The template lock value to set. This can be either a boolean or a string.
+     * @return self Returns the instance of the object.
+     */
+    public function setTemplateLock(bool|string $templateLock): self
+    {
+        return $this->templateLock($templateLock);
     }
 
     /**
@@ -785,6 +1048,18 @@ class PostType extends Entity
         $this->supports = $supports;
 
         return $this;
+    }
+
+    /**
+     * Sets the support options for the site.
+     *
+     * @deprecated Use supports() instead
+     * @param  bool|array  $supports  The support options, can be a boolean value or an array of options.
+     * @return self The updated instance of the class.
+     */
+    public function setSupports(bool|array $supports): self
+    {
+        return $this->supports($supports);
     }
 
     /**
@@ -826,11 +1101,23 @@ class PostType extends Entity
      * @param  array  $archive  The archive to set.
      * @return self The updated instance of the class.
      */
-    public function setArchive(array $archive): self
+    public function archive(array $archive): self
     {
         $this->archive = $archive;
 
         return $this;
+    }
+
+    /**
+     * Sets the archive for the site.
+     *
+     * @deprecated Use archive() instead
+     * @param  array  $archive  The archive to set.
+     * @return self The updated instance of the class.
+     */
+    public function setArchive(array $archive): self
+    {
+        return $this->archive($archive);
     }
 
     /**
@@ -848,9 +1135,32 @@ class PostType extends Entity
      *
      * @return self The updated instance of the class.
      */
-    public function enableBlockEditor(): self
+    public function blockEditor(): self
     {
         $this->showInRest = true;
+
+        return $this;
+    }
+
+    /**
+     * Alias for blockEditor() for backward compatibility.
+     *
+     * @deprecated Use blockEditor() instead
+     * @return self The updated instance of the class.
+     */
+    public function enableBlockEditor(): self
+    {
+        return $this->blockEditor();
+    }
+
+    /**
+     * Use classic editor instead of block editor.
+     *
+     * @return self The updated instance of the class.
+     */
+    public function classicEditor(): self
+    {
+        $this->showInRest = false;
 
         return $this;
     }
@@ -861,11 +1171,23 @@ class PostType extends Entity
      * @param  bool  $blockEditor  The flag indicating whether the block editor is enabled or not.
      * @return self The updated object.
      */
-    public function setBlockEditor(bool $blockEditor): self
+    public function withBlockEditor(bool $blockEditor): self
     {
         $this->showInRest = $blockEditor;
 
         return $this;
+    }
+
+    /**
+     * Sets the flag indicating whether the block editor is enabled or not.
+     *
+     * @deprecated Use withBlockEditor() instead
+     * @param  bool  $blockEditor  The flag indicating whether the block editor is enabled or not.
+     * @return self The updated object.
+     */
+    public function setBlockEditor(bool $blockEditor): self
+    {
+        return $this->withBlockEditor($blockEditor);
     }
 
     /**
@@ -880,13 +1202,36 @@ class PostType extends Entity
     }
 
     /**
-     * Enables dashboard activity for the current user.
+     * Enable dashboard activity for this post type.
      *
+     * @return self The current object with dashboard activity enabled.
+     */
+    public function dashboardActivity(): self
+    {
+        $this->dashboardActivity = true;
+
+        return $this;
+    }
+
+    /**
+     * Alias for dashboardActivity() for backward compatibility.
+     *
+     * @deprecated Use dashboardActivity() instead
      * @return self The current object with dashboard activity enabled.
      */
     public function enableDashboardActivity(): self
     {
-        $this->dashboardActivity = true;
+        return $this->dashboardActivity();
+    }
+
+    /**
+     * Disable dashboard activity for this post type.
+     *
+     * @return self The current object with dashboard activity disabled.
+     */
+    public function withoutDashboardActivity(): self
+    {
+        $this->dashboardActivity = false;
 
         return $this;
     }
@@ -897,11 +1242,23 @@ class PostType extends Entity
      * @param  bool  $dashboardActivity  The new value of the dashboard activity flag.
      * @return self Returns the current instance of the class.
      */
-    public function setDashboardActivity(bool $dashboardActivity): self
+    public function withDashboardActivity(bool $dashboardActivity): self
     {
         $this->dashboardActivity = $dashboardActivity;
 
         return $this;
+    }
+
+    /**
+     * Sets the dashboard activity flag.
+     *
+     * @deprecated Use withDashboardActivity() instead
+     * @param  bool  $dashboardActivity  The new value of the dashboard activity flag.
+     * @return self Returns the current instance of the class.
+     */
+    public function setDashboardActivity(bool $dashboardActivity): self
+    {
+        return $this->withDashboardActivity($dashboardActivity);
     }
 
     /**
@@ -943,11 +1300,23 @@ class PostType extends Entity
      * @param  string  $featuredImage  The URL or path to the featured image.
      * @return self The instance of the class.
      */
-    public function setFeaturedImage(string $featuredImage): self
+    public function featuredImage(string $featuredImage): self
     {
         $this->featuredImage = $featuredImage;
 
         return $this;
+    }
+
+    /**
+     * Sets the featured image for the site.
+     *
+     * @deprecated Use featuredImage() instead
+     * @param  string  $featuredImage  The URL or path to the featured image.
+     * @return self The instance of the class.
+     */
+    public function setFeaturedImage(string $featuredImage): self
+    {
+        return $this->featuredImage($featuredImage);
     }
 
     /**
@@ -961,12 +1330,47 @@ class PostType extends Entity
     }
 
     /**
+     * Enable quick edit for this post type.
+     *
+     * @return self The current object instance.
+     */
+    public function quickEdit(): self
+    {
+        $this->quickEdit = true;
+
+        return $this;
+    }
+
+    /**
+     * Alias for quickEdit() for backward compatibility.
+     *
+     * @deprecated Use quickEdit() instead
+     * @return self The current object instance.
+     */
+    public function enableQuickEdit(): self
+    {
+        return $this->quickEdit();
+    }
+
+    /**
+     * Disable quick edit for this post type.
+     *
+     * @return self The current object instance.
+     */
+    public function withoutQuickEdit(): self
+    {
+        $this->quickEdit = false;
+
+        return $this;
+    }
+
+    /**
      * Sets the quickEdit flag for the object.
      *
      * @param  bool  $quickEdit  The quickEdit flag to set.
      * @return self The updated object with the quickEdit flag set.
      */
-    public function setQuickEdit(bool $quickEdit): self
+    public function withQuickEdit(bool $quickEdit): self
     {
         $this->quickEdit = $quickEdit;
 
@@ -974,15 +1378,15 @@ class PostType extends Entity
     }
 
     /**
-     * Enables quick edit mode.
+     * Sets the quickEdit flag for the object.
      *
-     * @return self The current object instance.
+     * @deprecated Use withQuickEdit() instead
+     * @param  bool  $quickEdit  The quickEdit flag to set.
+     * @return self The updated object with the quickEdit flag set.
      */
-    public function enableQuickEdit(): self
+    public function setQuickEdit(bool $quickEdit): self
     {
-        $this->quickEdit = true;
-
-        return $this;
+        return $this->withQuickEdit($quickEdit);
     }
 
     /**
@@ -996,19 +1400,6 @@ class PostType extends Entity
     }
 
     /**
-     * Sets the value for the "showInFeed" property.
-     *
-     * @param  bool  $showInFeed  The value to set for the "showInFeed" property.
-     * @return self Returns the current object instance.
-     */
-    public function setShowInFeed(bool $showInFeed): self
-    {
-        $this->showInFeed = $showInFeed;
-
-        return $this;
-    }
-
-    /**
      * Marks the item as to be shown in the feed.
      *
      * @return $this
@@ -1018,6 +1409,43 @@ class PostType extends Entity
         $this->showInFeed = true;
 
         return $this;
+    }
+
+    /**
+     * Hide this post type from feeds.
+     *
+     * @return self Returns the current object instance.
+     */
+    public function hideFromFeed(): self
+    {
+        $this->showInFeed = false;
+
+        return $this;
+    }
+
+    /**
+     * Sets the value for the "showInFeed" property.
+     *
+     * @param  bool  $showInFeed  The value to set for the "showInFeed" property.
+     * @return self Returns the current object instance.
+     */
+    public function withShowInFeed(bool $showInFeed): self
+    {
+        $this->showInFeed = $showInFeed;
+
+        return $this;
+    }
+
+    /**
+     * Sets the value for the "showInFeed" property.
+     *
+     * @deprecated Use withShowInFeed() instead
+     * @param  bool  $showInFeed  The value to set for the "showInFeed" property.
+     * @return self Returns the current object instance.
+     */
+    public function setShowInFeed(bool $showInFeed): self
+    {
+        return $this->withShowInFeed($showInFeed);
     }
 
     /**

@@ -33,6 +33,13 @@ if (! function_exists('ExtCPTs\\get_taxonomies')) {
     }
 }
 
+if (! function_exists('ExtCPTs\\get_taxonomy')) {
+    function get_taxonomy($taxonomy)
+    {
+        return null; // Simulate the absence of the taxonomy object
+    }
+}
+
 if (! function_exists('ExtCPTs\\get_post_types')) {
     function get_post_types($args = [], $output = 'names', $operator = 'and')
     {
