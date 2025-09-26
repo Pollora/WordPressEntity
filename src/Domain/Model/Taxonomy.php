@@ -188,9 +188,9 @@ class Taxonomy extends Entity
      */
     public function init(): void
     {
-        $this->setSlug($this->slug);
-        $this->setSingular($this->singular);
-        $this->setPlural($this->plural);
+        $this->slug($this->slug);
+        $this->singular($this->singular);
+        $this->plural($this->plural);
     }
 
     /**
@@ -246,16 +246,40 @@ class Taxonomy extends Entity
     }
 
     /**
+     * Hide this taxonomy from tag cloud.
+     *
+     * @return self The updated Taxonomy object.
+     */
+    public function hideFromTagcloud(): self
+    {
+        $this->showTagcloud = false;
+
+        return $this;
+    }
+
+    /**
      * Sets whether to show the tagcloud.
      *
      * @param  bool  $showTagcloud  Whether to show the tagcloud.
      * @return self The updated Taxonomy object.
      */
-    public function setShowTagcloud(bool $showTagcloud): self
+    public function withShowTagcloud(bool $showTagcloud): self
     {
         $this->showTagcloud = $showTagcloud;
 
         return $this;
+    }
+
+    /**
+     * Sets whether to show the tagcloud.
+     *
+     * @deprecated Use withShowTagcloud() instead
+     * @param  bool  $showTagcloud  Whether to show the tagcloud.
+     * @return self The updated Taxonomy object.
+     */
+    public function setShowTagcloud(bool $showTagcloud): self
+    {
+        return $this->withShowTagcloud($showTagcloud);
     }
 
     /**
@@ -282,16 +306,40 @@ class Taxonomy extends Entity
     }
 
     /**
+     * Hide this taxonomy from quick edit.
+     *
+     * @return self The updated Taxonomy object.
+     */
+    public function hideFromQuickEdit(): self
+    {
+        $this->showInQuickEdit = false;
+
+        return $this;
+    }
+
+    /**
      * Set the value of showInQuickEdit property.
      *
      * @param  bool  $showInQuickEdit  The new value for the showInQuickEdit property.
      * @return self The updated Taxonomy object.
      */
-    public function setShowInQuickEdit(bool $showInQuickEdit): self
+    public function withShowInQuickEdit(bool $showInQuickEdit): self
     {
         $this->showInQuickEdit = $showInQuickEdit;
 
         return $this;
+    }
+
+    /**
+     * Set the value of showInQuickEdit property.
+     *
+     * @deprecated Use withShowInQuickEdit() instead
+     * @param  bool  $showInQuickEdit  The new value for the showInQuickEdit property.
+     * @return self The updated Taxonomy object.
+     */
+    public function setShowInQuickEdit(bool $showInQuickEdit): self
+    {
+        return $this->withShowInQuickEdit($showInQuickEdit);
     }
 
     /**
@@ -318,16 +366,40 @@ class Taxonomy extends Entity
     }
 
     /**
+     * Hide the admin column for this taxonomy.
+     *
+     * @return self The Taxonomy object.
+     */
+    public function hideAdminColumn(): self
+    {
+        $this->showAdminColumn = false;
+
+        return $this;
+    }
+
+    /**
      * Sets whether or not to show the admin column for the taxonomy.
      *
      * @param  bool  $showAdminColumn  Whether or not to show the admin column.
      * @return self The Taxonomy object.
      */
-    public function setShowAdminColumn(bool $showAdminColumn): self
+    public function withShowAdminColumn(bool $showAdminColumn): self
     {
         $this->showAdminColumn = $showAdminColumn;
 
         return $this;
+    }
+
+    /**
+     * Sets whether or not to show the admin column for the taxonomy.
+     *
+     * @deprecated Use withShowAdminColumn() instead
+     * @param  bool  $showAdminColumn  Whether or not to show the admin column.
+     * @return self The Taxonomy object.
+     */
+    public function setShowAdminColumn(bool $showAdminColumn): self
+    {
+        return $this->withShowAdminColumn($showAdminColumn);
     }
 
     /**
@@ -346,11 +418,23 @@ class Taxonomy extends Entity
      * @param  callable|bool|null  $metaBoxCb  The callback function for the meta box. Can be a callable, boolean, or null.
      * @return self The updated Taxonomy object.
      */
-    public function setMetaBoxCb(callable|bool|null $metaBoxCb): self
+    public function metaBoxCb(callable|bool|null $metaBoxCb): self
     {
         $this->metaBoxCb = $metaBoxCb;
 
         return $this;
+    }
+
+    /**
+     * Sets the callback function for the meta box.
+     *
+     * @deprecated Use metaBoxCb() instead
+     * @param  callable|bool|null  $metaBoxCb  The callback function for the meta box. Can be a callable, boolean, or null.
+     * @return self The updated Taxonomy object.
+     */
+    public function setMetaBoxCb(callable|bool|null $metaBoxCb): self
+    {
+        return $this->metaBoxCb($metaBoxCb);
     }
 
     /**
@@ -369,11 +453,23 @@ class Taxonomy extends Entity
      * @param  callable|null  $metaBoxSanitizeCb  The meta box sanitize callback function, or null if none.
      * @return self The Taxonomy object.
      */
-    public function setMetaBoxSanitizeCb(?callable $metaBoxSanitizeCb): self
+    public function metaBoxSanitizeCb(?callable $metaBoxSanitizeCb): self
     {
         $this->metaBoxSanitizeCb = $metaBoxSanitizeCb;
 
         return $this;
+    }
+
+    /**
+     * Sets the meta box sanitize callback function.
+     *
+     * @deprecated Use metaBoxSanitizeCb() instead
+     * @param  callable|null  $metaBoxSanitizeCb  The meta box sanitize callback function, or null if none.
+     * @return self The Taxonomy object.
+     */
+    public function setMetaBoxSanitizeCb(?callable $metaBoxSanitizeCb): self
+    {
+        return $this->metaBoxSanitizeCb($metaBoxSanitizeCb);
     }
 
     /**
@@ -392,11 +488,23 @@ class Taxonomy extends Entity
      * @param  callable  $updateCountCallback  The callback function to be set.
      * @return self Returns the current instance of the Taxonomy class.
      */
-    public function setUpdateCountCallback(callable $updateCountCallback): self
+    public function updateCountCallback(callable $updateCountCallback): self
     {
         $this->updateCountCallback = $updateCountCallback;
 
         return $this;
+    }
+
+    /**
+     * Sets the callback function for updating the count.
+     *
+     * @deprecated Use updateCountCallback() instead
+     * @param  callable  $updateCountCallback  The callback function to be set.
+     * @return self Returns the current instance of the Taxonomy class.
+     */
+    public function setUpdateCountCallback(callable $updateCountCallback): self
+    {
+        return $this->updateCountCallback($updateCountCallback);
     }
 
     /**
@@ -416,11 +524,23 @@ class Taxonomy extends Entity
      * @param  array|string  $defaultTerm  The default term for the taxonomy. Can be either an array or a string.
      * @return self The current instance of the Taxonomy object.
      */
-    public function setDefaultTerm(array|string $defaultTerm): self
+    public function defaultTerm(array|string $defaultTerm): self
     {
         $this->defaultTerm = $defaultTerm;
 
         return $this;
+    }
+
+    /**
+     * Sets the default term for the taxonomy.
+     *
+     * @deprecated Use defaultTerm() instead
+     * @param  array|string  $defaultTerm  The default term for the taxonomy. Can be either an array or a string.
+     * @return self The current instance of the Taxonomy object.
+     */
+    public function setDefaultTerm(array|string $defaultTerm): self
+    {
+        return $this->defaultTerm($defaultTerm);
     }
 
     /**
@@ -446,17 +566,42 @@ class Taxonomy extends Entity
     }
 
     /**
+     * Disable sorting for the Taxonomy.
+     *
+     * @return self Returns the Taxonomy object for method chaining.
+     */
+    public function unsort(): self
+    {
+        $this->sort = false;
+
+        return $this;
+    }
+
+    /**
      * Sets the sorting option for the Taxonomy.
      *
      * @param  bool|null  $sort  The sorting option for the Taxonomy. Pass true to enable sorting, false to disable sorting,
      *                           or null to use the default sorting option.
      * @return self Returns the Taxonomy object for method chaining.
      */
-    public function setSort(?bool $sort): self
+    public function withSort(?bool $sort): self
     {
         $this->sort = $sort;
 
         return $this;
+    }
+
+    /**
+     * Sets the sorting option for the Taxonomy.
+     *
+     * @deprecated Use withSort() instead
+     * @param  bool|null  $sort  The sorting option for the Taxonomy. Pass true to enable sorting, false to disable sorting,
+     *                           or null to use the default sorting option.
+     * @return self Returns the Taxonomy object for method chaining.
+     */
+    public function setSort(?bool $sort): self
+    {
+        return $this->withSort($sort);
     }
 
     /**
@@ -465,11 +610,23 @@ class Taxonomy extends Entity
      * @param  array|null  $args  The arguments for the taxonomy.
      * @return self Returns the updated Taxonomy object.
      */
-    public function setArgs(?array $args): self
+    public function args(?array $args): self
     {
         $this->args = $args;
 
         return $this;
+    }
+
+    /**
+     * Set the arguments for the taxonomy.
+     *
+     * @deprecated Use args() instead
+     * @param  array|null  $args  The arguments for the taxonomy.
+     * @return self Returns the updated Taxonomy object.
+     */
+    public function setArgs(?array $args): self
+    {
+        return $this->args($args);
     }
 
     /**
@@ -495,16 +652,40 @@ class Taxonomy extends Entity
     }
 
     /**
+     * Disable the "checked on top" behavior.
+     *
+     * @return self Returns the updated Taxonomy object.
+     */
+    public function uncheckedOntop(): self
+    {
+        $this->checkedOntop = false;
+
+        return $this;
+    }
+
+    /**
      * Sets the checkedOntop flag for the Taxonomy object.
      *
      * @param  bool  $checkedOntop  The flag indicating whether the Taxonomy should be checked on top or not.
      * @return self Returns the updated Taxonomy object.
      */
-    public function setCheckedOntop(bool $checkedOntop): self
+    public function withCheckedOntop(bool $checkedOntop): self
     {
         $this->checkedOntop = $checkedOntop;
 
         return $this;
+    }
+
+    /**
+     * Sets the checkedOntop flag for the Taxonomy object.
+     *
+     * @deprecated Use withCheckedOntop() instead
+     * @param  bool  $checkedOntop  The flag indicating whether the Taxonomy should be checked on top or not.
+     * @return self Returns the updated Taxonomy object.
+     */
+    public function setCheckedOntop(bool $checkedOntop): self
+    {
+        return $this->withCheckedOntop($checkedOntop);
     }
 
     /**
@@ -530,16 +711,40 @@ class Taxonomy extends Entity
     }
 
     /**
+     * Make this taxonomy non-exclusive.
+     *
+     * @return self The Taxonomy instance.
+     */
+    public function nonExclusive(): self
+    {
+        $this->exclusive = false;
+
+        return $this;
+    }
+
+    /**
      * Sets the exclusive flag.
      *
      * @param  bool  $exclusive  The exclusive flag value.
      * @return self The Taxonomy instance.
      */
-    public function setExclusive(bool $exclusive): self
+    public function withExclusive(bool $exclusive): self
     {
         $this->exclusive = $exclusive;
 
         return $this;
+    }
+
+    /**
+     * Sets the exclusive flag.
+     *
+     * @deprecated Use withExclusive() instead
+     * @param  bool  $exclusive  The exclusive flag value.
+     * @return self The Taxonomy instance.
+     */
+    public function setExclusive(bool $exclusive): self
+    {
+        return $this->withExclusive($exclusive);
     }
 
     /**
@@ -565,15 +770,39 @@ class Taxonomy extends Entity
     }
 
     /**
+     * Disallow hierarchy in taxonomy.
+     *
+     * @return self The updated Taxonomy object.
+     */
+    public function disallowHierarchy(): self
+    {
+        $this->allowHierarchy = false;
+
+        return $this;
+    }
+
+    /**
      * Sets whether the taxonomy allows hierarchical terms or not.
      *
      * @param  bool  $allowHierarchy  The value indicating whether hierarchical terms are allowed.
      * @return self The updated Taxonomy object.
      */
-    public function setAllowHierarchy(bool $allowHierarchy): self
+    public function withAllowHierarchy(bool $allowHierarchy): self
     {
         $this->allowHierarchy = $allowHierarchy;
 
         return $this;
+    }
+
+    /**
+     * Sets whether the taxonomy allows hierarchical terms or not.
+     *
+     * @deprecated Use withAllowHierarchy() instead
+     * @param  bool  $allowHierarchy  The value indicating whether hierarchical terms are allowed.
+     * @return self The updated Taxonomy object.
+     */
+    public function setAllowHierarchy(bool $allowHierarchy): self
+    {
+        return $this->withAllowHierarchy($allowHierarchy);
     }
 }

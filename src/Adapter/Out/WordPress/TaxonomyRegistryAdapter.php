@@ -19,9 +19,9 @@ class TaxonomyRegistryAdapter implements TaxonomyRegistryPort
      *
      * This is a generic method that delegates to the specific taxonomy registration method.
      *
-     * @param string $slug The entity slug
-     * @param array $args Registration arguments
-     * @param array $names Entity names (singular, plural)
+     * @param  string  $slug  The entity slug
+     * @param  array  $args  Registration arguments
+     * @param  array  $names  Entity names (singular, plural)
      */
     public function register(string $slug, array $args, array $names): void
     {
@@ -39,10 +39,10 @@ class TaxonomyRegistryAdapter implements TaxonomyRegistryPort
      *
      * Uses register_extended_taxonomy if available, or falls back to register_taxonomy.
      *
-     * @param string $slug The taxonomy slug
-     * @param string|array $objectType The post type(s) the taxonomy is associated with
-     * @param array $args Registration arguments
-     * @param array $names Taxonomy names (singular, plural)
+     * @param  string  $slug  The taxonomy slug
+     * @param  string|array  $objectType  The post type(s) the taxonomy is associated with
+     * @param  array  $args  Registration arguments
+     * @param  array  $names  Taxonomy names (singular, plural)
      */
     public function registerTaxonomy(string $slug, string|array $objectType, array $args, array $names): void
     {
@@ -57,19 +57,19 @@ class TaxonomyRegistryAdapter implements TaxonomyRegistryPort
     /**
      * Fallback to standard WordPress taxonomy registration if extended registration fails
      *
-     * @param string $slug Taxonomy slug
-     * @param string|array $objectType Post type(s) to register the taxonomy for
-     * @param array $args Arguments for taxonomy
-     * @param array $names Names for taxonomy
+     * @param  string  $slug  Taxonomy slug
+     * @param  string|array  $objectType  Post type(s) to register the taxonomy for
+     * @param  array  $args  Arguments for taxonomy
+     * @param  array  $names  Names for taxonomy
      */
     protected function fallbackToStandardTaxonomyRegistration(string $slug, string|array $objectType, array $args, array $names): void
     {
-        if (!function_exists('\\register_taxonomy')) {
+        if (! function_exists('\\register_taxonomy')) {
             throw new \Exception('The register_taxonomy function is not available.');
         }
 
         // Merge names into args
-        if (!empty($names)) {
+        if (! empty($names)) {
             if (isset($names['singular'])) {
                 $args['labels']['singular_name'] = $names['singular'];
             }

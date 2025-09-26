@@ -187,11 +187,23 @@ abstract class Entity
      * @param  string  $label  The label to set for the entity.
      * @return self Returns the instance of the class for method chaining.
      */
-    public function setLabel(string $label): self
+    public function label(string $label): self
     {
         $this->label = $label;
 
         return $this;
+    }
+
+    /**
+     * Sets the label for the entity.
+     *
+     * @deprecated Use label() instead
+     * @param  string  $label  The label to set for the entity.
+     * @return self Returns the instance of the class for method chaining.
+     */
+    public function setLabel(string $label): self
+    {
+        return $this->label($label);
     }
 
     /**
@@ -212,11 +224,23 @@ abstract class Entity
      * @param  array  $labels  The labels array containing the labels for the entity.
      * @return self Returns an instance of the class.
      */
-    public function setLabels(array $labels): self
+    public function labels(array $labels): self
     {
         $this->labels = $labels;
 
         return $this;
+    }
+
+    /**
+     * Sets the labels for the entity.
+     *
+     * @deprecated Use labels() instead
+     * @param  array  $labels  The labels array containing the labels for the entity.
+     * @return self Returns an instance of the class.
+     */
+    public function setLabels(array $labels): self
+    {
+        return $this->labels($labels);
     }
 
     /**
@@ -236,11 +260,23 @@ abstract class Entity
      * @param  string  $description  The description of the entity.
      * @return self Returns an instance of the class with the updated description.
      */
-    public function setDescription(string $description): self
+    public function description(string $description): self
     {
         $this->description = $description;
 
         return $this;
+    }
+
+    /**
+     * Sets the description of the entity.
+     *
+     * @deprecated Use description() instead
+     * @param  string  $description  The description of the entity.
+     * @return self Returns an instance of the class with the updated description.
+     */
+    public function setDescription(string $description): self
+    {
+        return $this->description($description);
     }
 
     /**
@@ -286,11 +322,23 @@ abstract class Entity
      * @param  bool  $public  The boolean indicating if the entity should be public or not.
      * @return self Returns the modified instance of the object.
      */
-    public function setPublic(bool $public): self
+    public function withPublic(bool $public): self
     {
         $this->public = $public;
 
         return $this;
+    }
+
+    /**
+     * Sets whether the entity should be public or not.
+     *
+     * @deprecated Use withPublic() instead
+     * @param  bool  $public  The boolean indicating if the entity should be public or not.
+     * @return self Returns the modified instance of the object.
+     */
+    public function setPublic(bool $public): self
+    {
+        return $this->withPublic($public);
     }
 
     /**
@@ -319,16 +367,40 @@ abstract class Entity
     }
 
     /**
+     * Make this entity not publicly queryable.
+     *
+     * @return self Returns an instance of the current class.
+     */
+    public function notPubliclyQueryable(): self
+    {
+        $this->publiclyQueryable = false;
+
+        return $this;
+    }
+
+    /**
      * Sets whether the entity can be publicly queried.
      *
      * @param  bool|null  $publiclyQueryable  The value indicating whether the entity can be publicly queried.
      * @return self Returns an instance of the current object.
      */
-    public function setPubliclyQueryable(?bool $publiclyQueryable): self
+    public function withPubliclyQueryable(?bool $publiclyQueryable): self
     {
         $this->publiclyQueryable = $publiclyQueryable;
 
         return $this;
+    }
+
+    /**
+     * Sets whether the entity can be publicly queried.
+     *
+     * @deprecated Use withPubliclyQueryable() instead
+     * @param  bool|null  $publiclyQueryable  The value indicating whether the entity can be publicly queried.
+     * @return self Returns an instance of the current object.
+     */
+    public function setPubliclyQueryable(?bool $publiclyQueryable): self
+    {
+        return $this->withPubliclyQueryable($publiclyQueryable);
     }
 
     /**
@@ -353,6 +425,43 @@ abstract class Entity
         $this->hierarchical = true;
 
         return $this;
+    }
+
+    /**
+     * Disable hierarchical mode for entity.
+     *
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function nonHierarchical(): self
+    {
+        $this->hierarchical = false;
+
+        return $this;
+    }
+
+    /**
+     * Sets whether the entity is hierarchical.
+     *
+     * @param  bool  $hierarchical  Whether the entity is hierarchical.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function withHierarchical(bool $hierarchical): self
+    {
+        $this->hierarchical = $hierarchical;
+
+        return $this;
+    }
+
+    /**
+     * Sets whether the entity is hierarchical.
+     *
+     * @deprecated Use withHierarchical() instead
+     * @param  bool  $hierarchical  Whether the entity is hierarchical.
+     * @return self Returns the current object instance to allow method chaining.
+     */
+    public function setHierarchical(bool $hierarchical): self
+    {
+        return $this->withHierarchical($hierarchical);
     }
 
     /**
@@ -381,6 +490,18 @@ abstract class Entity
     }
 
     /**
+     * Hide the UI for this entity.
+     *
+     * @return self Returns the updated instance of the class.
+     */
+    public function hideUi(): self
+    {
+        $this->showUi = false;
+
+        return $this;
+    }
+
+    /**
      * Sets whether the UI should be displayed for the entity.
      *
      * @param  bool|null  $showUi  The value indicating if the UI should be displayed.
@@ -389,11 +510,26 @@ abstract class Entity
      *                             - If the value is null, the decision is not defined and may require further processing.
      * @return self The updated instance of the class.
      */
-    public function setShowUi(?bool $showUi): self
+    public function withShowUi(?bool $showUi): self
     {
         $this->showUi = $showUi;
 
         return $this;
+    }
+
+    /**
+     * Sets whether the UI should be displayed for the entity.
+     *
+     * @deprecated Use withShowUi() instead
+     * @param  bool|null  $showUi  The value indicating if the UI should be displayed.
+     *                             - If the value is true, the UI should be displayed.
+     *                             - If the value is false, the UI should not be displayed.
+     *                             - If the value is null, the decision is not defined and may require further processing.
+     * @return self The updated instance of the class.
+     */
+    public function setShowUi(?bool $showUi): self
+    {
+        return $this->withShowUi($showUi);
     }
 
     /**
@@ -422,8 +558,34 @@ abstract class Entity
     }
 
     /**
+     * Hide this entity from the menu.
+     *
+     * @return self Returns the instance of the class.
+     */
+    public function hideFromMenu(): self
+    {
+        $this->showInMenu = false;
+
+        return $this;
+    }
+
+    /**
      * Set the value for the showInMenu property.
      *
+     * @param  bool|string  $showInMenu  The value to set for the showInMenu property.
+     * @return self Returns the instance of the class.
+     */
+    public function withShowInMenu(bool|string $showInMenu): self
+    {
+        $this->showInMenu = $showInMenu;
+
+        return $this;
+    }
+
+    /**
+     * Set the value for the showInMenu property.
+     *
+     * @deprecated Use withShowInMenu() instead
      * @param  bool|string  $showInMenu  The value to set for the showInMenu property.
      * @return self Returns the instance of the class.
      */
@@ -445,6 +607,30 @@ abstract class Entity
     }
 
     /**
+     * Show this entity in navigation menus.
+     *
+     * @return self Returns the modified instance of the object.
+     */
+    public function showInNavMenus(): self
+    {
+        $this->showInNavMenus = true;
+
+        return $this;
+    }
+
+    /**
+     * Hide this entity from navigation menus.
+     *
+     * @return self Returns the modified instance of the object.
+     */
+    public function hideFromNavMenus(): self
+    {
+        $this->showInNavMenus = false;
+
+        return $this;
+    }
+
+    /**
      * Sets whether the entity should be displayed in navigation menus.
      *
      * @param  bool|null  $showInNavMenus  Whether the entity should be displayed in navigation menus.
@@ -452,11 +638,25 @@ abstract class Entity
      *                                     or null if the entity's visibility in navigation menus should not be modified.
      * @return self Returns the modified instance of the object.
      */
-    public function setShowInNavMenus(?bool $showInNavMenus): self
+    public function withShowInNavMenus(?bool $showInNavMenus): self
     {
         $this->showInNavMenus = $showInNavMenus;
 
         return $this;
+    }
+
+    /**
+     * Sets whether the entity should be displayed in navigation menus.
+     *
+     * @deprecated Use withShowInNavMenus() instead
+     * @param  bool|null  $showInNavMenus  Whether the entity should be displayed in navigation menus.
+     *                                     Set to true if the entity should be displayed, false if it should not be displayed,
+     *                                     or null if the entity's visibility in navigation menus should not be modified.
+     * @return self Returns the modified instance of the object.
+     */
+    public function setShowInNavMenus(?bool $showInNavMenus): self
+    {
+        return $this->withShowInNavMenus($showInNavMenus);
     }
 
     /**
@@ -475,11 +675,35 @@ abstract class Entity
      * @param  bool|string  $queryVar  The new value for the queryVar property.
      * @return self The instance of the object.
      */
-    public function setQueryVar(bool|string $queryVar): self
+    public function queryVar(bool|string $queryVar): self
     {
         $this->queryVar = $queryVar;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the queryVar property.
+     *
+     * @deprecated Use withQueryVar() instead
+     * @param  bool|string  $queryVar  The new value for the queryVar property.
+     * @return self The instance of the object.
+     */
+    public function withQueryVar(bool|string $queryVar): self
+    {
+        return $this->queryVar($queryVar);
+    }
+
+    /**
+     * Sets the value of the queryVar property.
+     *
+     * @deprecated Use queryVar() instead
+     * @param  bool|string  $queryVar  The new value for the queryVar property.
+     * @return self The instance of the object.
+     */
+    public function setQueryVar(bool|string $queryVar): self
+    {
+        return $this->queryVar($queryVar);
     }
 
     /**
@@ -498,11 +722,35 @@ abstract class Entity
      * @param  bool|array  $rewrite  The new value for the rewrite property.
      * @return self Returns an instance of the current object.
      */
-    public function setRewrite(bool|array $rewrite): self
+    public function rewrite(bool|array $rewrite): self
     {
         $this->rewrite = $rewrite;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the rewrite property.
+     *
+     * @deprecated Use withRewrite() instead
+     * @param  bool|array  $rewrite  The new value for the rewrite property.
+     * @return self Returns an instance of the current object.
+     */
+    public function withRewrite(bool|array $rewrite): self
+    {
+        return $this->rewrite($rewrite);
+    }
+
+    /**
+     * Sets the value of the rewrite property.
+     *
+     * @deprecated Use rewrite() instead
+     * @param  bool|array  $rewrite  The new value for the rewrite property.
+     * @return self Returns an instance of the current object.
+     */
+    public function setRewrite(bool|array $rewrite): self
+    {
+        return $this->rewrite($rewrite);
     }
 
     /**
@@ -528,16 +776,40 @@ abstract class Entity
     }
 
     /**
+     * Hide the object from REST API responses.
+     *
+     * @return self The modified object.
+     */
+    public function hideFromRest(): self
+    {
+        $this->showInRest = false;
+
+        return $this;
+    }
+
+    /**
      * Sets the value of the showInRest property.
      *
      * @param  bool  $showInRest  The new value for the showInRest property.
      * @return self The current object with the updated showInRest property.
      */
-    public function setShowInRest(bool $showInRest): self
+    public function withShowInRest(bool $showInRest): self
     {
         $this->showInRest = $showInRest;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the showInRest property.
+     *
+     * @deprecated Use withShowInRest() instead
+     * @param  bool  $showInRest  The new value for the showInRest property.
+     * @return self The current object with the updated showInRest property.
+     */
+    public function setShowInRest(bool $showInRest): self
+    {
+        return $this->withShowInRest($showInRest);
     }
 
     /**
@@ -556,11 +828,35 @@ abstract class Entity
      * @param  bool|string  $restBase  The value to set for the restBase property.
      * @return self This instance of the object.
      */
-    public function setRestBase(bool|string $restBase): self
+    public function restBase(bool|string $restBase): self
     {
         $this->restBase = $restBase;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the restBase property.
+     *
+     * @deprecated Use withRestBase() instead
+     * @param  bool|string  $restBase  The value to set for the restBase property.
+     * @return self This instance of the object.
+     */
+    public function withRestBase(bool|string $restBase): self
+    {
+        return $this->restBase($restBase);
+    }
+
+    /**
+     * Sets the value of the restBase property.
+     *
+     * @deprecated Use restBase() instead
+     * @param  bool|string  $restBase  The value to set for the restBase property.
+     * @return self This instance of the object.
+     */
+    public function setRestBase(bool|string $restBase): self
+    {
+        return $this->restBase($restBase);
     }
 
     /**
@@ -579,11 +875,35 @@ abstract class Entity
      * @param  bool|string  $restNamespace  The value to set for the restNamespace property.
      * @return self This method returns the current instance of the class.
      */
-    public function setRestNamespace(bool|string $restNamespace): self
+    public function restNamespace(bool|string $restNamespace): self
     {
         $this->restNamespace = $restNamespace;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the restNamespace property.
+     *
+     * @deprecated Use withRestNamespace() instead
+     * @param  bool|string  $restNamespace  The value to set for the restNamespace property.
+     * @return self This method returns the current instance of the class.
+     */
+    public function withRestNamespace(bool|string $restNamespace): self
+    {
+        return $this->restNamespace($restNamespace);
+    }
+
+    /**
+     * Sets the value of the restNamespace property.
+     *
+     * @deprecated Use restNamespace() instead
+     * @param  bool|string  $restNamespace  The value to set for the restNamespace property.
+     * @return self This method returns the current instance of the class.
+     */
+    public function setRestNamespace(bool|string $restNamespace): self
+    {
+        return $this->restNamespace($restNamespace);
     }
 
     /**
@@ -602,11 +922,35 @@ abstract class Entity
      * @param  bool|string  $restControllerClass  The value of the restControllerClass property.
      * @return self The current instance for method chaining.
      */
-    public function setRestControllerClass(bool|string $restControllerClass): self
+    public function restControllerClass(bool|string $restControllerClass): self
     {
         $this->restControllerClass = $restControllerClass;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the restControllerClass property.
+     *
+     * @deprecated Use withRestControllerClass() instead
+     * @param  bool|string  $restControllerClass  The value of the restControllerClass property.
+     * @return self The current instance for method chaining.
+     */
+    public function withRestControllerClass(bool|string $restControllerClass): self
+    {
+        return $this->restControllerClass($restControllerClass);
+    }
+
+    /**
+     * Sets the value of the restControllerClass property.
+     *
+     * @deprecated Use restControllerClass() instead
+     * @param  bool|string  $restControllerClass  The value of the restControllerClass property.
+     * @return self The current instance for method chaining.
+     */
+    public function setRestControllerClass(bool|string $restControllerClass): self
+    {
+        return $this->restControllerClass($restControllerClass);
     }
 
     /**
@@ -625,11 +969,35 @@ abstract class Entity
      * @param  array  $capabilities  The capability to set.
      * @return self Returns a reference to the object.
      */
-    public function setCapabilities(array $capabilities): self
+    public function capabilities(array $capabilities): self
     {
         $this->capabilities = $capabilities;
 
         return $this;
+    }
+
+    /**
+     * Sets the capability for the object.
+     *
+     * @deprecated Use withCapabilities() instead
+     * @param  array  $capabilities  The capability to set.
+     * @return self Returns a reference to the object.
+     */
+    public function withCapabilities(array $capabilities): self
+    {
+        return $this->capabilities($capabilities);
+    }
+
+    /**
+     * Sets the capability for the object.
+     *
+     * @deprecated Use capabilities() instead
+     * @param  array  $capabilities  The capability to set.
+     * @return self Returns a reference to the object.
+     */
+    public function setCapabilities(array $capabilities): self
+    {
+        return $this->capabilities($capabilities);
     }
 
     /**
@@ -638,11 +1006,35 @@ abstract class Entity
      * @param  string|null  $singular  The value to set for the singular property.
      * @return self Returns the instance of the class.
      */
-    public function setSingular(?string $singular): self
+    public function singular(?string $singular): self
     {
         $this->names['singular'] = $singular;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the singular property.
+     *
+     * @deprecated Use withSingular() instead
+     * @param  string|null  $singular  The value to set for the singular property.
+     * @return self Returns the instance of the class.
+     */
+    public function withSingular(?string $singular): self
+    {
+        return $this->singular($singular);
+    }
+
+    /**
+     * Sets the value of the singular property.
+     *
+     * @deprecated Use singular() instead
+     * @param  string|null  $singular  The value to set for the singular property.
+     * @return self Returns the instance of the class.
+     */
+    public function setSingular(?string $singular): self
+    {
+        return $this->singular($singular);
     }
 
     /**
@@ -651,11 +1043,35 @@ abstract class Entity
      * @param  string|null  $plural  The new value for the plural property.
      * @return self Returns the instance of the current object.
      */
-    public function setPlural(?string $plural): self
+    public function plural(?string $plural): self
     {
         $this->names['plural'] = $plural;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the plural property.
+     *
+     * @deprecated Use withPlural() instead
+     * @param  string|null  $plural  The new value for the plural property.
+     * @return self Returns the instance of the current object.
+     */
+    public function withPlural(?string $plural): self
+    {
+        return $this->plural($plural);
+    }
+
+    /**
+     * Sets the value of the plural property.
+     *
+     * @deprecated Use plural() instead
+     * @param  string|null  $plural  The new value for the plural property.
+     * @return self Returns the instance of the current object.
+     */
+    public function setPlural(?string $plural): self
+    {
+        return $this->plural($plural);
     }
 
     /**
@@ -667,11 +1083,41 @@ abstract class Entity
      * @param  string|null  $slug  The slug to be set for the object. If null, the slug will be unset.
      * @return self Returns the current object instance.
      */
-    public function setSlug(?string $slug): self
+    public function slug(?string $slug): self
     {
         $this->names['slug'] = $slug;
 
         return $this;
+    }
+
+    /**
+     * Sets the slug for the object.
+     *
+     * This method sets the slug for the object. The slug is used as a unique identifier
+     * for the object and can be used in various operations.
+     *
+     * @deprecated Use withSlug() instead
+     * @param  string|null  $slug  The slug to be set for the object. If null, the slug will be unset.
+     * @return self Returns the current object instance.
+     */
+    public function withSlug(?string $slug): self
+    {
+        return $this->slug($slug);
+    }
+
+    /**
+     * Sets the slug for the object.
+     *
+     * This method sets the slug for the object. The slug is used as a unique identifier
+     * for the object and can be used in various operations.
+     *
+     * @deprecated Use slug() instead
+     * @param  string|null  $slug  The slug to be set for the object. If null, the slug will be unset.
+     * @return self Returns the current object instance.
+     */
+    public function setSlug(?string $slug): self
+    {
+        return $this->slug($slug);
     }
 
     /**
@@ -680,11 +1126,35 @@ abstract class Entity
      * @param  array  $names  The names to be set.
      * @return $this The current instance of the class.
      */
-    public function setNames(array $names): self
+    public function names(array $names): self
     {
         $this->names = $names;
 
         return $this;
+    }
+
+    /**
+     * Sets the names property with the given array.
+     *
+     * @deprecated Use withNames() instead
+     * @param  array  $names  The names to be set.
+     * @return $this The current instance of the class.
+     */
+    public function withNames(array $names): self
+    {
+        return $this->names($names);
+    }
+
+    /**
+     * Sets the names property with the given array.
+     *
+     * @deprecated Use names() instead
+     * @param  array  $names  The names to be set.
+     * @return $this The current instance of the class.
+     */
+    public function setNames(array $names): self
+    {
+        return $this->names($names);
     }
 
     /**
@@ -720,16 +1190,40 @@ abstract class Entity
     }
 
     /**
+     * Disables the dashboard glance feature.
+     *
+     * @return self The current instance of the class.
+     */
+    public function disableDashboardGlance(): self
+    {
+        $this->dashboardGlance = false;
+
+        return $this;
+    }
+
+    /**
      * Set the value of dashboard glance.
      *
      * @param  bool  $dashboardGlance  The new value for dashboard glance.
      * @return self Returns this object instance.
      */
-    public function setDashboardGlance(bool $dashboardGlance): self
+    public function withDashboardGlance(bool $dashboardGlance): self
     {
         $this->dashboardGlance = $dashboardGlance;
 
         return $this;
+    }
+
+    /**
+     * Set the value of dashboard glance.
+     *
+     * @deprecated Use withDashboardGlance() instead
+     * @param  bool  $dashboardGlance  The new value for dashboard glance.
+     * @return self Returns this object instance.
+     */
+    public function setDashboardGlance(bool $dashboardGlance): self
+    {
+        return $this->withDashboardGlance($dashboardGlance);
     }
 
     /**
@@ -748,11 +1242,35 @@ abstract class Entity
      * @param  array  $adminCols  The value to set for the adminCols property.
      * @return self Returns this object instance.
      */
-    public function setAdminCols(array $adminCols): self
+    public function adminCols(array $adminCols): self
     {
         $this->adminCols = $adminCols;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of the adminCols property.
+     *
+     * @deprecated Use withAdminCols() instead
+     * @param  array  $adminCols  The value to set for the adminCols property.
+     * @return self Returns this object instance.
+     */
+    public function withAdminCols(array $adminCols): self
+    {
+        return $this->adminCols($adminCols);
+    }
+
+    /**
+     * Sets the value of the adminCols property.
+     *
+     * @deprecated Use adminCols() instead
+     * @param  array  $adminCols  The value to set for the adminCols property.
+     * @return self Returns this object instance.
+     */
+    public function setAdminCols(array $adminCols): self
+    {
+        return $this->adminCols($adminCols);
     }
 
     /**
