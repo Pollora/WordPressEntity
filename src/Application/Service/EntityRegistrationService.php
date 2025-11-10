@@ -55,6 +55,6 @@ class EntityRegistrationService
 
             $this->entityRegistry->register($entity->getSlug(), $args, $names);
 
-        }, 99);
+        }, 5);
     }
 }
