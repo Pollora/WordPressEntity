@@ -253,6 +253,15 @@ $postType->registerMetaBoxCb(function() {
 });
 ```
 
+### Priority Configuration
+
+```php
+$postType->priority(10);           // Set registration priority (default: 5)
+```
+
+The priority determines when the post type is registered during WordPress initialization. Lower numbers execute earlier.
+
+
 ### Custom Properties
 
 ```php

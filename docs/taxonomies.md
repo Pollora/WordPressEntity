@@ -193,6 +193,15 @@ $taxonomy->updateCountCallback(function($terms, $taxonomy) {
 
 ## Advanced Features
 
+### Priority Configuration
+
+```php
+$taxonomy->priority(10);           // Set registration priority (default: 5)
+```
+
+The priority determines when the taxonomy is registered during WordPress initialization. Lower numbers execute earlier.
+
+
 ### Checked On Top
 
 ```php

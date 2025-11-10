@@ -42,9 +42,6 @@ class EntityRegistrationService
     {
         // Hook the actual registration to WordPress init hook
         \add_action('init', function () use ($entity) {
-            $entityType = $entity->getEntity() ?? 'unknown';
-            $slug = $entity->getSlug() ?? 'unknown';
-
             $args = $entity->getArgs();
 
             $args['names'] = $entity->getNames();
@@ -55,6 +52,6 @@ class EntityRegistrationService
 
             $this->entityRegistry->register($entity->getSlug(), $args, $names);
 
-        }, 5);
+        }, $entity->getPriority());
     }
 }

@@ -17,6 +17,13 @@ abstract class Entity
     use ArgumentHelper;
 
     /**
+     * The priority of the post type or taxonomy declaration
+     *
+     * @var init
+     */
+    public int $priority = 5;
+
+    /**
      * Name of the post type or taxonomy shown in the menu. Usually plural.
      *
      * @var string
@@ -168,6 +175,29 @@ abstract class Entity
      * The entity name, used for registration.
      */
     protected string $entity = '';
+
+    /**
+     * Retrieves the label for the entity.
+     *
+     * @return int|null The declaration priority of the entity
+     */
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    /**
+     * Sets the priority for the entity declaration.
+     *
+     * @param  int  $priority  The priority to set for the entity declaration
+     * @return self Returns the instance of the class for method chaining.
+     */
+    public function priority(int $priority): self
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
 
     /**
      * Retrieves the label for the entity.
@@ -1335,6 +1365,9 @@ abstract class Entity
      */
     public function getArgs(): ?array
     {
-        return $this->buildArguments();
+        $args = $this->buildArguments();
+        unset($args['priority']);
+
+        return $args;
     }
 }
