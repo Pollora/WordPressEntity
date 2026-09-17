@@ -274,6 +274,7 @@ class Taxonomy extends Entity
      * Sets whether to show the tagcloud.
      *
      * @deprecated Use withShowTagcloud() instead
+     *
      * @param  bool  $showTagcloud  Whether to show the tagcloud.
      * @return self The updated Taxonomy object.
      */
@@ -334,6 +335,7 @@ class Taxonomy extends Entity
      * Set the value of showInQuickEdit property.
      *
      * @deprecated Use withShowInQuickEdit() instead
+     *
      * @param  bool  $showInQuickEdit  The new value for the showInQuickEdit property.
      * @return self The updated Taxonomy object.
      */
@@ -394,6 +396,7 @@ class Taxonomy extends Entity
      * Sets whether or not to show the admin column for the taxonomy.
      *
      * @deprecated Use withShowAdminColumn() instead
+     *
      * @param  bool  $showAdminColumn  Whether or not to show the admin column.
      * @return self The Taxonomy object.
      */
@@ -429,6 +432,7 @@ class Taxonomy extends Entity
      * Sets the callback function for the meta box.
      *
      * @deprecated Use metaBoxCb() instead
+     *
      * @param  callable|bool|null  $metaBoxCb  The callback function for the meta box. Can be a callable, boolean, or null.
      * @return self The updated Taxonomy object.
      */
@@ -464,6 +468,7 @@ class Taxonomy extends Entity
      * Sets the meta box sanitize callback function.
      *
      * @deprecated Use metaBoxSanitizeCb() instead
+     *
      * @param  callable|null  $metaBoxSanitizeCb  The meta box sanitize callback function, or null if none.
      * @return self The Taxonomy object.
      */
@@ -499,6 +504,7 @@ class Taxonomy extends Entity
      * Sets the callback function for updating the count.
      *
      * @deprecated Use updateCountCallback() instead
+     *
      * @param  callable  $updateCountCallback  The callback function to be set.
      * @return self Returns the current instance of the Taxonomy class.
      */
@@ -535,6 +541,7 @@ class Taxonomy extends Entity
      * Sets the default term for the taxonomy.
      *
      * @deprecated Use defaultTerm() instead
+     *
      * @param  array|string  $defaultTerm  The default term for the taxonomy. Can be either an array or a string.
      * @return self The current instance of the Taxonomy object.
      */
@@ -595,6 +602,7 @@ class Taxonomy extends Entity
      * Sets the sorting option for the Taxonomy.
      *
      * @deprecated Use withSort() instead
+     *
      * @param  bool|null  $sort  The sorting option for the Taxonomy. Pass true to enable sorting, false to disable sorting,
      *                           or null to use the default sorting option.
      * @return self Returns the Taxonomy object for method chaining.
@@ -621,6 +629,7 @@ class Taxonomy extends Entity
      * Set the arguments for the taxonomy.
      *
      * @deprecated Use args() instead
+     *
      * @param  array|null  $args  The arguments for the taxonomy.
      * @return self Returns the updated Taxonomy object.
      */
@@ -680,6 +689,7 @@ class Taxonomy extends Entity
      * Sets the checkedOntop flag for the Taxonomy object.
      *
      * @deprecated Use withCheckedOntop() instead
+     *
      * @param  bool  $checkedOntop  The flag indicating whether the Taxonomy should be checked on top or not.
      * @return self Returns the updated Taxonomy object.
      */
@@ -739,6 +749,7 @@ class Taxonomy extends Entity
      * Sets the exclusive flag.
      *
      * @deprecated Use withExclusive() instead
+     *
      * @param  bool  $exclusive  The exclusive flag value.
      * @return self The Taxonomy instance.
      */
@@ -798,6 +809,7 @@ class Taxonomy extends Entity
      * Sets whether the taxonomy allows hierarchical terms or not.
      *
      * @deprecated Use withAllowHierarchy() instead
+     *
      * @param  bool  $allowHierarchy  The value indicating whether hierarchical terms are allowed.
      * @return self The updated Taxonomy object.
      */

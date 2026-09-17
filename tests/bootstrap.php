@@ -6,4 +6,4 @@ declare(strict_types=1);
 require_once __DIR__.'/../vendor/autoload.php';
 
 // Configure Mockery
-\Mockery::getConfiguration()->allowMockingNonExistentMethods(true);
+Mockery::getConfiguration()->allowMockingNonExistentMethods(true);

@@ -125,8 +125,8 @@ test('can use withArgs to set custom arguments', function () {
             'custom_arg' => 'custom_value',
             'another_custom' => true,
             'nested' => [
-                'value' => 'nested_value'
-            ]
+                'value' => 'nested_value',
+            ],
         ]);
 
     $args = $postType->getArgs();

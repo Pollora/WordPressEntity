@@ -392,6 +392,7 @@ class PostType extends Entity
      * Set whether the posts should be excluded from search.
      *
      * @deprecated Use withExcludeFromSearch() instead
+     *
      * @param  bool|null  $excludeFromSearch  Determines if the item should be excluded from search. Set to null to unset.
      * @return self Returns the current object instance to allow method chaining.
      */
@@ -453,6 +454,7 @@ class PostType extends Entity
      * Set whether the hierarchical property should be enabled or not.
      *
      * @deprecated Use withHierarchical() instead
+     *
      * @param  bool  $hierarchical  Whether the hierarchical property should be enabled or not.
      * @return self Returns the current object instance to allow method chaining.
      */
@@ -512,6 +514,7 @@ class PostType extends Entity
      * Set whether to show the object in the admin bar.
      *
      * @deprecated Use withShowInAdminBar() instead
+     *
      * @param  bool|null  $showInAdminBar  Set to true to show the object in the admin bar, false to hide it, or null to inherit the value from the parent object.
      * @return self Returns the current object instance to allow method chaining.
      */
@@ -547,6 +550,7 @@ class PostType extends Entity
      * Set the menu position.
      *
      * @deprecated Use menuPosition() instead
+     *
      * @param  int|null  $menuPosition  The menu position to set.
      * @return self Returns the current object instance to allow method chaining.
      */
@@ -582,6 +586,7 @@ class PostType extends Entity
      * Set the menu icon.
      *
      * @deprecated Use menuIcon() instead
+     *
      * @param  string|null  $menuIcon  The menu icon to set.
      * @return self Returns the current object instance to allow method chaining.
      */
@@ -617,6 +622,7 @@ class PostType extends Entity
      * Set the capability type.
      *
      * @deprecated Use capabilityType() instead
+     *
      * @param  string  $capabilityType  The capability type to set.
      * @return self Returns the current object instance to allow method chaining.
      */
@@ -681,6 +687,7 @@ class PostType extends Entity
      * Set the value of mapMetaCap property.
      *
      * @deprecated Use withMapMetaCap() instead
+     *
      * @param  bool  $mapMetaCap  The boolean value indicating if the map capability should be mapped to meta capabilities.
      * @return self Returns the current object instance to allow method chaining.
      */
@@ -716,6 +723,7 @@ class PostType extends Entity
      * Sets the callback function for registering a meta box.
      *
      * @deprecated Use registerMetaBoxCb() instead
+     *
      * @param  callable|null  $registerMetaBoxCb  The callback function for registering a meta box.
      * @return self Returns an instance of the object.
      */
@@ -753,6 +761,7 @@ class PostType extends Entity
      * Set the taxonomies for this object.
      *
      * @deprecated Use taxonomies() instead
+     *
      * @param  array  $taxonomies  An array of taxonomies to set.
      * @return self Returns itself after setting the taxonomies.
      */
@@ -835,6 +844,7 @@ class PostType extends Entity
      * Sets the flag indicating whether the content can be exported or not.
      *
      * @deprecated Use withCanExport() instead
+     *
      * @param  bool  $canExport  The flag indicating whether the content can be exported.
      * @return self Returns the modified object.
      */
@@ -871,6 +881,7 @@ class PostType extends Entity
      * Alias for deleteWithUser() for backward compatibility.
      *
      * @deprecated Use deleteWithUser() instead
+     *
      * @return self Returns the current object instance.
      */
     public function deletedWithUser(): self
@@ -907,6 +918,7 @@ class PostType extends Entity
      * Sets whether the deletion of the object should be performed with the user.
      *
      * @deprecated Use withDeleteWithUser() instead
+     *
      * @param  bool|null  $deleteWithUser  Whether the deletion should be performed with the user.
      *                                     True if deletion should be performed with the user,
      *                                     false if not, and null if it should be determined
@@ -945,6 +957,7 @@ class PostType extends Entity
      * Sets the REST controller.
      *
      * @deprecated Use restController() instead
+     *
      * @param  \WP_REST_Controller  $restController  The REST controller to set.
      * @return self Returns the updated instance of the object.
      */
@@ -980,6 +993,7 @@ class PostType extends Entity
      * Sets the template for the object.
      *
      * @deprecated Use template() instead
+     *
      * @param  array  $template  The template to set.
      * @return self Returns the object itself for method chaining.
      */
@@ -1018,6 +1032,7 @@ class PostType extends Entity
      * Sets the template lock for the object.
      *
      * @deprecated Use templateLock() instead
+     *
      * @param  bool|string  $templateLock  The template lock value to set. This can be either a boolean or a string.
      * @return self Returns the instance of the object.
      */
@@ -1054,6 +1069,7 @@ class PostType extends Entity
      * Sets the support options for the site.
      *
      * @deprecated Use supports() instead
+     *
      * @param  bool|array  $supports  The support options, can be a boolean value or an array of options.
      * @return self The updated instance of the class.
      */
@@ -1112,6 +1128,7 @@ class PostType extends Entity
      * Sets the archive for the site.
      *
      * @deprecated Use archive() instead
+     *
      * @param  array  $archive  The archive to set.
      * @return self The updated instance of the class.
      */
@@ -1146,6 +1163,7 @@ class PostType extends Entity
      * Alias for blockEditor() for backward compatibility.
      *
      * @deprecated Use blockEditor() instead
+     *
      * @return self The updated instance of the class.
      */
     public function enableBlockEditor(): self
@@ -1182,6 +1200,7 @@ class PostType extends Entity
      * Sets the flag indicating whether the block editor is enabled or not.
      *
      * @deprecated Use withBlockEditor() instead
+     *
      * @param  bool  $blockEditor  The flag indicating whether the block editor is enabled or not.
      * @return self The updated object.
      */
@@ -1217,6 +1236,7 @@ class PostType extends Entity
      * Alias for dashboardActivity() for backward compatibility.
      *
      * @deprecated Use dashboardActivity() instead
+     *
      * @return self The current object with dashboard activity enabled.
      */
     public function enableDashboardActivity(): self
@@ -1253,6 +1273,7 @@ class PostType extends Entity
      * Sets the dashboard activity flag.
      *
      * @deprecated Use withDashboardActivity() instead
+     *
      * @param  bool  $dashboardActivity  The new value of the dashboard activity flag.
      * @return self Returns the current instance of the class.
      */
@@ -1311,6 +1332,7 @@ class PostType extends Entity
      * Sets the featured image for the site.
      *
      * @deprecated Use featuredImage() instead
+     *
      * @param  string  $featuredImage  The URL or path to the featured image.
      * @return self The instance of the class.
      */
@@ -1345,6 +1367,7 @@ class PostType extends Entity
      * Alias for quickEdit() for backward compatibility.
      *
      * @deprecated Use quickEdit() instead
+     *
      * @return self The current object instance.
      */
     public function enableQuickEdit(): self
@@ -1381,6 +1404,7 @@ class PostType extends Entity
      * Sets the quickEdit flag for the object.
      *
      * @deprecated Use withQuickEdit() instead
+     *
      * @param  bool  $quickEdit  The quickEdit flag to set.
      * @return self The updated object with the quickEdit flag set.
      */
@@ -1440,6 +1464,7 @@ class PostType extends Entity
      * Sets the value for the "showInFeed" property.
      *
      * @deprecated Use withShowInFeed() instead
+     *
      * @param  bool  $showInFeed  The value to set for the "showInFeed" property.
      * @return self Returns the current object instance.
      */

@@ -65,7 +65,7 @@ class TestEntityRegistrationService extends EntityRegistrationService
             $names = $entity->getNames();
 
             $this->getEntityRegistry()->register($entity->getSlug(), $args, $names);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if (function_exists('\\error_log')) {
                 \error_log('Error during entity registration: '.$e->getMessage());
             }
@@ -76,7 +76,7 @@ class TestEntityRegistrationService extends EntityRegistrationService
     protected function getEntityRegistry(): EntityRegistryPort
     {
         // Use reflection to access the private property
-        $reflection = new \ReflectionClass(EntityRegistrationService::class);
+        $reflection = new ReflectionClass(EntityRegistrationService::class);
         $property = $reflection->getProperty('entityRegistry');
         $property->setAccessible(true);
 
@@ -137,7 +137,7 @@ test('handles errors during registration', function () {
                 $names = $entity->getNames();
 
                 $this->getEntityRegistry()->register($entity->getSlug(), $args, $names);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 if (function_exists('\\error_log')) {
                     \error_log('Error during entity registration: '.$e->getMessage());
                 }

@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+use Pollora\Entity\Domain\Model\PostType;
+use Pollora\Entity\Domain\Model\Taxonomy;
 
 // Simulation of global WordPress functions
 if (! function_exists('add_action')) {
@@ -59,14 +61,14 @@ if (! function_exists('register_taxonomy')) {
 if (! function_exists('register_extended_post_type')) {
     function register_extended_post_type($slug, $args = [], $names = [])
     {
-        return new \Pollora\Entity\Domain\Model\PostType($slug, $names['singular'] ?? null, $names['plural'] ?? null);
+        return new PostType($slug, $names['singular'] ?? null, $names['plural'] ?? null);
     }
 }
 
 if (! function_exists('register_extended_taxonomy')) {
     function register_extended_taxonomy($slug, $object_type, $args = [], $names = [])
     {
-        return new \Pollora\Entity\Domain\Model\Taxonomy($slug, $object_type, $names['singular'] ?? null, $names['plural'] ?? null);
+        return new Taxonomy($slug, $object_type, $names['singular'] ?? null, $names['plural'] ?? null);
     }
 }
 
@@ -113,4 +115,3 @@ if (! function_exists('sanitize_text_field')) {
         return $str;
     }
 }
-
