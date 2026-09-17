@@ -18,8 +18,6 @@ abstract class Entity
 
     /**
      * The priority of the post type or taxonomy declaration
-     *
-     * @var init
      */
     public int $priority = 5;
 
@@ -190,7 +188,7 @@ abstract class Entity
      * Sets the priority for the entity declaration.
      *
      * @param  int  $priority  The priority to set for the entity declaration
-     * @return self Returns the instance of the class for method chaining.
+     * @return static Returns the instance of the class for method chaining.
      */
     public function priority(int $priority): self
     {
@@ -215,7 +213,7 @@ abstract class Entity
      * Sets the label for the entity.
      *
      * @param  string  $label  The label to set for the entity.
-     * @return self Returns the instance of the class for method chaining.
+     * @return static Returns the instance of the class for method chaining.
      */
     public function label(string $label): self
     {
@@ -228,8 +226,9 @@ abstract class Entity
      * Sets the label for the entity.
      *
      * @deprecated Use label() instead
+     *
      * @param  string  $label  The label to set for the entity.
-     * @return self Returns the instance of the class for method chaining.
+     * @return static Returns the instance of the class for method chaining.
      */
     public function setLabel(string $label): self
     {
@@ -252,7 +251,7 @@ abstract class Entity
      * Sets the labels for the entity.
      *
      * @param  array  $labels  The labels array containing the labels for the entity.
-     * @return self Returns an instance of the class.
+     * @return static Returns an instance of the class.
      */
     public function labels(array $labels): self
     {
@@ -265,8 +264,9 @@ abstract class Entity
      * Sets the labels for the entity.
      *
      * @deprecated Use labels() instead
+     *
      * @param  array  $labels  The labels array containing the labels for the entity.
-     * @return self Returns an instance of the class.
+     * @return static Returns an instance of the class.
      */
     public function setLabels(array $labels): self
     {
@@ -288,7 +288,7 @@ abstract class Entity
      * Sets the description of the entity.
      *
      * @param  string  $description  The description of the entity.
-     * @return self Returns an instance of the class with the updated description.
+     * @return static Returns an instance of the class with the updated description.
      */
     public function description(string $description): self
     {
@@ -301,8 +301,9 @@ abstract class Entity
      * Sets the description of the entity.
      *
      * @deprecated Use description() instead
+     *
      * @param  string  $description  The description of the entity.
-     * @return self Returns an instance of the class with the updated description.
+     * @return static Returns an instance of the class with the updated description.
      */
     public function setDescription(string $description): self
     {
@@ -325,7 +326,7 @@ abstract class Entity
     /**
      * Set the entity as public.
      *
-     * @return self Returns an instance of the current object with the public property set to true.
+     * @return static Returns an instance of the current object with the public property set to true.
      */
     public function public(): self
     {
@@ -337,7 +338,7 @@ abstract class Entity
     /**
      * Sets the entity as private.
      *
-     * @return self Returns the current instance of the class.
+     * @return static Returns the current instance of the class.
      */
     public function private(): self
     {
@@ -350,7 +351,7 @@ abstract class Entity
      * Sets whether the entity should be public or not.
      *
      * @param  bool  $public  The boolean indicating if the entity should be public or not.
-     * @return self Returns the modified instance of the object.
+     * @return static Returns the modified instance of the object.
      */
     public function withPublic(bool $public): self
     {
@@ -363,8 +364,9 @@ abstract class Entity
      * Sets whether the entity should be public or not.
      *
      * @deprecated Use withPublic() instead
+     *
      * @param  bool  $public  The boolean indicating if the entity should be public or not.
-     * @return self Returns the modified instance of the object.
+     * @return static Returns the modified instance of the object.
      */
     public function setPublic(bool $public): self
     {
@@ -387,7 +389,7 @@ abstract class Entity
     /**
      * Sets the object to be publicly queryable.
      *
-     * @return self Returns an instance of the current class.
+     * @return static Returns an instance of the current class.
      */
     public function publiclyQueryable(): self
     {
@@ -399,7 +401,7 @@ abstract class Entity
     /**
      * Make this entity not publicly queryable.
      *
-     * @return self Returns an instance of the current class.
+     * @return static Returns an instance of the current class.
      */
     public function notPubliclyQueryable(): self
     {
@@ -412,7 +414,7 @@ abstract class Entity
      * Sets whether the entity can be publicly queried.
      *
      * @param  bool|null  $publiclyQueryable  The value indicating whether the entity can be publicly queried.
-     * @return self Returns an instance of the current object.
+     * @return static Returns an instance of the current object.
      */
     public function withPubliclyQueryable(?bool $publiclyQueryable): self
     {
@@ -425,8 +427,9 @@ abstract class Entity
      * Sets whether the entity can be publicly queried.
      *
      * @deprecated Use withPubliclyQueryable() instead
+     *
      * @param  bool|null  $publiclyQueryable  The value indicating whether the entity can be publicly queried.
-     * @return self Returns an instance of the current object.
+     * @return static Returns an instance of the current object.
      */
     public function setPubliclyQueryable(?bool $publiclyQueryable): self
     {
@@ -448,7 +451,7 @@ abstract class Entity
     /**
      * Enable hierarchical mode for entity.
      *
-     * @return self Returns the current object instance to allow method chaining.
+     * @return static Returns the current object instance to allow method chaining.
      */
     public function hierarchical(): self
     {
@@ -460,7 +463,7 @@ abstract class Entity
     /**
      * Disable hierarchical mode for entity.
      *
-     * @return self Returns the current object instance to allow method chaining.
+     * @return static Returns the current object instance to allow method chaining.
      */
     public function nonHierarchical(): self
     {
@@ -473,7 +476,7 @@ abstract class Entity
      * Sets whether the entity is hierarchical.
      *
      * @param  bool  $hierarchical  Whether the entity is hierarchical.
-     * @return self Returns the current object instance to allow method chaining.
+     * @return static Returns the current object instance to allow method chaining.
      */
     public function withHierarchical(bool $hierarchical): self
     {
@@ -486,8 +489,9 @@ abstract class Entity
      * Sets whether the entity is hierarchical.
      *
      * @deprecated Use withHierarchical() instead
+     *
      * @param  bool  $hierarchical  Whether the entity is hierarchical.
-     * @return self Returns the current object instance to allow method chaining.
+     * @return static Returns the current object instance to allow method chaining.
      */
     public function setHierarchical(bool $hierarchical): self
     {
@@ -510,7 +514,7 @@ abstract class Entity
     /**
      * Sets the flag to show the UI for the entity.
      *
-     * @return self Returns the updated instance of the class.
+     * @return static Returns the updated instance of the class.
      */
     public function showUi(): self
     {
@@ -522,7 +526,7 @@ abstract class Entity
     /**
      * Hide the UI for this entity.
      *
-     * @return self Returns the updated instance of the class.
+     * @return static Returns the updated instance of the class.
      */
     public function hideUi(): self
     {
@@ -538,7 +542,7 @@ abstract class Entity
      *                             - If the value is true, the UI should be displayed.
      *                             - If the value is false, the UI should not be displayed.
      *                             - If the value is null, the decision is not defined and may require further processing.
-     * @return self The updated instance of the class.
+     * @return static The updated instance of the class.
      */
     public function withShowUi(?bool $showUi): self
     {
@@ -551,11 +555,12 @@ abstract class Entity
      * Sets whether the UI should be displayed for the entity.
      *
      * @deprecated Use withShowUi() instead
+     *
      * @param  bool|null  $showUi  The value indicating if the UI should be displayed.
      *                             - If the value is true, the UI should be displayed.
      *                             - If the value is false, the UI should not be displayed.
      *                             - If the value is null, the decision is not defined and may require further processing.
-     * @return self The updated instance of the class.
+     * @return static The updated instance of the class.
      */
     public function setShowUi(?bool $showUi): self
     {
@@ -590,7 +595,7 @@ abstract class Entity
     /**
      * Hide this entity from the menu.
      *
-     * @return self Returns the instance of the class.
+     * @return static Returns the instance of the class.
      */
     public function hideFromMenu(): self
     {
@@ -603,7 +608,7 @@ abstract class Entity
      * Set the value for the showInMenu property.
      *
      * @param  bool|string  $showInMenu  The value to set for the showInMenu property.
-     * @return self Returns the instance of the class.
+     * @return static Returns the instance of the class.
      */
     public function withShowInMenu(bool|string $showInMenu): self
     {
@@ -616,8 +621,9 @@ abstract class Entity
      * Set the value for the showInMenu property.
      *
      * @deprecated Use withShowInMenu() instead
+     *
      * @param  bool|string  $showInMenu  The value to set for the showInMenu property.
-     * @return self Returns the instance of the class.
+     * @return static Returns the instance of the class.
      */
     public function setShowInMenu(bool|string $showInMenu): self
     {
@@ -639,7 +645,7 @@ abstract class Entity
     /**
      * Show this entity in navigation menus.
      *
-     * @return self Returns the modified instance of the object.
+     * @return static Returns the modified instance of the object.
      */
     public function showInNavMenus(): self
     {
@@ -651,7 +657,7 @@ abstract class Entity
     /**
      * Hide this entity from navigation menus.
      *
-     * @return self Returns the modified instance of the object.
+     * @return static Returns the modified instance of the object.
      */
     public function hideFromNavMenus(): self
     {
@@ -666,7 +672,7 @@ abstract class Entity
      * @param  bool|null  $showInNavMenus  Whether the entity should be displayed in navigation menus.
      *                                     Set to true if the entity should be displayed, false if it should not be displayed,
      *                                     or null if the entity's visibility in navigation menus should not be modified.
-     * @return self Returns the modified instance of the object.
+     * @return static Returns the modified instance of the object.
      */
     public function withShowInNavMenus(?bool $showInNavMenus): self
     {
@@ -679,10 +685,11 @@ abstract class Entity
      * Sets whether the entity should be displayed in navigation menus.
      *
      * @deprecated Use withShowInNavMenus() instead
+     *
      * @param  bool|null  $showInNavMenus  Whether the entity should be displayed in navigation menus.
      *                                     Set to true if the entity should be displayed, false if it should not be displayed,
      *                                     or null if the entity's visibility in navigation menus should not be modified.
-     * @return self Returns the modified instance of the object.
+     * @return static Returns the modified instance of the object.
      */
     public function setShowInNavMenus(?bool $showInNavMenus): self
     {
@@ -703,7 +710,7 @@ abstract class Entity
      * Sets the value of the queryVar property.
      *
      * @param  bool|string  $queryVar  The new value for the queryVar property.
-     * @return self The instance of the object.
+     * @return static The instance of the object.
      */
     public function queryVar(bool|string $queryVar): self
     {
@@ -716,8 +723,9 @@ abstract class Entity
      * Sets the value of the queryVar property.
      *
      * @deprecated Use withQueryVar() instead
+     *
      * @param  bool|string  $queryVar  The new value for the queryVar property.
-     * @return self The instance of the object.
+     * @return static The instance of the object.
      */
     public function withQueryVar(bool|string $queryVar): self
     {
@@ -728,8 +736,9 @@ abstract class Entity
      * Sets the value of the queryVar property.
      *
      * @deprecated Use queryVar() instead
+     *
      * @param  bool|string  $queryVar  The new value for the queryVar property.
-     * @return self The instance of the object.
+     * @return static The instance of the object.
      */
     public function setQueryVar(bool|string $queryVar): self
     {
@@ -750,7 +759,7 @@ abstract class Entity
      * Sets the value of the rewrite property.
      *
      * @param  bool|array  $rewrite  The new value for the rewrite property.
-     * @return self Returns an instance of the current object.
+     * @return static Returns an instance of the current object.
      */
     public function rewrite(bool|array $rewrite): self
     {
@@ -763,8 +772,9 @@ abstract class Entity
      * Sets the value of the rewrite property.
      *
      * @deprecated Use withRewrite() instead
+     *
      * @param  bool|array  $rewrite  The new value for the rewrite property.
-     * @return self Returns an instance of the current object.
+     * @return static Returns an instance of the current object.
      */
     public function withRewrite(bool|array $rewrite): self
     {
@@ -775,8 +785,9 @@ abstract class Entity
      * Sets the value of the rewrite property.
      *
      * @deprecated Use rewrite() instead
+     *
      * @param  bool|array  $rewrite  The new value for the rewrite property.
-     * @return self Returns an instance of the current object.
+     * @return static Returns an instance of the current object.
      */
     public function setRewrite(bool|array $rewrite): self
     {
@@ -796,7 +807,7 @@ abstract class Entity
     /**
      * Marks the object as eligible to be shown in REST API responses.
      *
-     * @return self The modified object.
+     * @return static The modified object.
      */
     public function showInRest(): self
     {
@@ -808,7 +819,7 @@ abstract class Entity
     /**
      * Hide the object from REST API responses.
      *
-     * @return self The modified object.
+     * @return static The modified object.
      */
     public function hideFromRest(): self
     {
@@ -821,7 +832,7 @@ abstract class Entity
      * Sets the value of the showInRest property.
      *
      * @param  bool  $showInRest  The new value for the showInRest property.
-     * @return self The current object with the updated showInRest property.
+     * @return static The current object with the updated showInRest property.
      */
     public function withShowInRest(bool $showInRest): self
     {
@@ -834,8 +845,9 @@ abstract class Entity
      * Sets the value of the showInRest property.
      *
      * @deprecated Use withShowInRest() instead
+     *
      * @param  bool  $showInRest  The new value for the showInRest property.
-     * @return self The current object with the updated showInRest property.
+     * @return static The current object with the updated showInRest property.
      */
     public function setShowInRest(bool $showInRest): self
     {
@@ -856,7 +868,7 @@ abstract class Entity
      * Sets the value of the restBase property.
      *
      * @param  bool|string  $restBase  The value to set for the restBase property.
-     * @return self This instance of the object.
+     * @return static This instance of the object.
      */
     public function restBase(bool|string $restBase): self
     {
@@ -869,8 +881,9 @@ abstract class Entity
      * Sets the value of the restBase property.
      *
      * @deprecated Use withRestBase() instead
+     *
      * @param  bool|string  $restBase  The value to set for the restBase property.
-     * @return self This instance of the object.
+     * @return static This instance of the object.
      */
     public function withRestBase(bool|string $restBase): self
     {
@@ -881,8 +894,9 @@ abstract class Entity
      * Sets the value of the restBase property.
      *
      * @deprecated Use restBase() instead
+     *
      * @param  bool|string  $restBase  The value to set for the restBase property.
-     * @return self This instance of the object.
+     * @return static This instance of the object.
      */
     public function setRestBase(bool|string $restBase): self
     {
@@ -903,7 +917,7 @@ abstract class Entity
      * Sets the value of the restNamespace property.
      *
      * @param  bool|string  $restNamespace  The value to set for the restNamespace property.
-     * @return self This method returns the current instance of the class.
+     * @return static This method returns the current instance of the class.
      */
     public function restNamespace(bool|string $restNamespace): self
     {
@@ -916,8 +930,9 @@ abstract class Entity
      * Sets the value of the restNamespace property.
      *
      * @deprecated Use withRestNamespace() instead
+     *
      * @param  bool|string  $restNamespace  The value to set for the restNamespace property.
-     * @return self This method returns the current instance of the class.
+     * @return static This method returns the current instance of the class.
      */
     public function withRestNamespace(bool|string $restNamespace): self
     {
@@ -928,8 +943,9 @@ abstract class Entity
      * Sets the value of the restNamespace property.
      *
      * @deprecated Use restNamespace() instead
+     *
      * @param  bool|string  $restNamespace  The value to set for the restNamespace property.
-     * @return self This method returns the current instance of the class.
+     * @return static This method returns the current instance of the class.
      */
     public function setRestNamespace(bool|string $restNamespace): self
     {
@@ -950,7 +966,7 @@ abstract class Entity
      * Sets the value of the restControllerClass property.
      *
      * @param  bool|string  $restControllerClass  The value of the restControllerClass property.
-     * @return self The current instance for method chaining.
+     * @return static The current instance for method chaining.
      */
     public function restControllerClass(bool|string $restControllerClass): self
     {
@@ -963,8 +979,9 @@ abstract class Entity
      * Sets the value of the restControllerClass property.
      *
      * @deprecated Use withRestControllerClass() instead
+     *
      * @param  bool|string  $restControllerClass  The value of the restControllerClass property.
-     * @return self The current instance for method chaining.
+     * @return static The current instance for method chaining.
      */
     public function withRestControllerClass(bool|string $restControllerClass): self
     {
@@ -975,8 +992,9 @@ abstract class Entity
      * Sets the value of the restControllerClass property.
      *
      * @deprecated Use restControllerClass() instead
+     *
      * @param  bool|string  $restControllerClass  The value of the restControllerClass property.
-     * @return self The current instance for method chaining.
+     * @return static The current instance for method chaining.
      */
     public function setRestControllerClass(bool|string $restControllerClass): self
     {
@@ -997,7 +1015,7 @@ abstract class Entity
      * Sets the capability for the object.
      *
      * @param  array  $capabilities  The capability to set.
-     * @return self Returns a reference to the object.
+     * @return static Returns a reference to the object.
      */
     public function capabilities(array $capabilities): self
     {
@@ -1010,8 +1028,9 @@ abstract class Entity
      * Sets the capability for the object.
      *
      * @deprecated Use withCapabilities() instead
+     *
      * @param  array  $capabilities  The capability to set.
-     * @return self Returns a reference to the object.
+     * @return static Returns a reference to the object.
      */
     public function withCapabilities(array $capabilities): self
     {
@@ -1022,8 +1041,9 @@ abstract class Entity
      * Sets the capability for the object.
      *
      * @deprecated Use capabilities() instead
+     *
      * @param  array  $capabilities  The capability to set.
-     * @return self Returns a reference to the object.
+     * @return static Returns a reference to the object.
      */
     public function setCapabilities(array $capabilities): self
     {
@@ -1034,7 +1054,7 @@ abstract class Entity
      * Sets the value of the singular property.
      *
      * @param  string|null  $singular  The value to set for the singular property.
-     * @return self Returns the instance of the class.
+     * @return static Returns the instance of the class.
      */
     public function singular(?string $singular): self
     {
@@ -1047,8 +1067,9 @@ abstract class Entity
      * Sets the value of the singular property.
      *
      * @deprecated Use withSingular() instead
+     *
      * @param  string|null  $singular  The value to set for the singular property.
-     * @return self Returns the instance of the class.
+     * @return static Returns the instance of the class.
      */
     public function withSingular(?string $singular): self
     {
@@ -1059,8 +1080,9 @@ abstract class Entity
      * Sets the value of the singular property.
      *
      * @deprecated Use singular() instead
+     *
      * @param  string|null  $singular  The value to set for the singular property.
-     * @return self Returns the instance of the class.
+     * @return static Returns the instance of the class.
      */
     public function setSingular(?string $singular): self
     {
@@ -1071,7 +1093,7 @@ abstract class Entity
      * Sets the value of the plural property.
      *
      * @param  string|null  $plural  The new value for the plural property.
-     * @return self Returns the instance of the current object.
+     * @return static Returns the instance of the current object.
      */
     public function plural(?string $plural): self
     {
@@ -1084,8 +1106,9 @@ abstract class Entity
      * Sets the value of the plural property.
      *
      * @deprecated Use withPlural() instead
+     *
      * @param  string|null  $plural  The new value for the plural property.
-     * @return self Returns the instance of the current object.
+     * @return static Returns the instance of the current object.
      */
     public function withPlural(?string $plural): self
     {
@@ -1096,8 +1119,9 @@ abstract class Entity
      * Sets the value of the plural property.
      *
      * @deprecated Use plural() instead
+     *
      * @param  string|null  $plural  The new value for the plural property.
-     * @return self Returns the instance of the current object.
+     * @return static Returns the instance of the current object.
      */
     public function setPlural(?string $plural): self
     {
@@ -1111,7 +1135,7 @@ abstract class Entity
      * for the object and can be used in various operations.
      *
      * @param  string|null  $slug  The slug to be set for the object. If null, the slug will be unset.
-     * @return self Returns the current object instance.
+     * @return static Returns the current object instance.
      */
     public function slug(?string $slug): self
     {
@@ -1127,8 +1151,9 @@ abstract class Entity
      * for the object and can be used in various operations.
      *
      * @deprecated Use withSlug() instead
+     *
      * @param  string|null  $slug  The slug to be set for the object. If null, the slug will be unset.
-     * @return self Returns the current object instance.
+     * @return static Returns the current object instance.
      */
     public function withSlug(?string $slug): self
     {
@@ -1142,8 +1167,9 @@ abstract class Entity
      * for the object and can be used in various operations.
      *
      * @deprecated Use slug() instead
+     *
      * @param  string|null  $slug  The slug to be set for the object. If null, the slug will be unset.
-     * @return self Returns the current object instance.
+     * @return static Returns the current object instance.
      */
     public function setSlug(?string $slug): self
     {
@@ -1167,6 +1193,7 @@ abstract class Entity
      * Sets the names property with the given array.
      *
      * @deprecated Use withNames() instead
+     *
      * @param  array  $names  The names to be set.
      * @return $this The current instance of the class.
      */
@@ -1179,6 +1206,7 @@ abstract class Entity
      * Sets the names property with the given array.
      *
      * @deprecated Use names() instead
+     *
      * @param  array  $names  The names to be set.
      * @return $this The current instance of the class.
      */
@@ -1210,7 +1238,7 @@ abstract class Entity
     /**
      * Enables the dashboard glance feature.
      *
-     * @return self The current instance of the class.
+     * @return static The current instance of the class.
      */
     public function enableDashboardGlance(): self
     {
@@ -1222,7 +1250,7 @@ abstract class Entity
     /**
      * Disables the dashboard glance feature.
      *
-     * @return self The current instance of the class.
+     * @return static The current instance of the class.
      */
     public function disableDashboardGlance(): self
     {
@@ -1235,7 +1263,7 @@ abstract class Entity
      * Set the value of dashboard glance.
      *
      * @param  bool  $dashboardGlance  The new value for dashboard glance.
-     * @return self Returns this object instance.
+     * @return static Returns this object instance.
      */
     public function withDashboardGlance(bool $dashboardGlance): self
     {
@@ -1248,8 +1276,9 @@ abstract class Entity
      * Set the value of dashboard glance.
      *
      * @deprecated Use withDashboardGlance() instead
+     *
      * @param  bool  $dashboardGlance  The new value for dashboard glance.
-     * @return self Returns this object instance.
+     * @return static Returns this object instance.
      */
     public function setDashboardGlance(bool $dashboardGlance): self
     {
@@ -1270,7 +1299,7 @@ abstract class Entity
      * Sets the value of the adminCols property.
      *
      * @param  array  $adminCols  The value to set for the adminCols property.
-     * @return self Returns this object instance.
+     * @return static Returns this object instance.
      */
     public function adminCols(array $adminCols): self
     {
@@ -1283,8 +1312,9 @@ abstract class Entity
      * Sets the value of the adminCols property.
      *
      * @deprecated Use withAdminCols() instead
+     *
      * @param  array  $adminCols  The value to set for the adminCols property.
-     * @return self Returns this object instance.
+     * @return static Returns this object instance.
      */
     public function withAdminCols(array $adminCols): self
     {
@@ -1295,8 +1325,9 @@ abstract class Entity
      * Sets the value of the adminCols property.
      *
      * @deprecated Use adminCols() instead
+     *
      * @param  array  $adminCols  The value to set for the adminCols property.
-     * @return self Returns this object instance.
+     * @return static Returns this object instance.
      */
     public function setAdminCols(array $adminCols): self
     {

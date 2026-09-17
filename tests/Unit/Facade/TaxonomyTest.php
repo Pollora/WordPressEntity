@@ -49,7 +49,7 @@ test('can chain multiple fluent methods', function () {
         ->showInNavMenus()
         ->publiclyQueryable()
         ->hideFromTagCloud()
-        ->sort(true)
+        ->sort()
         ->exclusive()
         ->checkedOntop()
         ->queryVar('location')
@@ -119,9 +119,15 @@ test('can set rest API properties', function () {
 });
 
 test('can set callback functions', function () {
-    $metaBoxCb = function() { echo 'Meta box content'; };
-    $sanitizeCb = function($value) { return sanitize_text_field($value); };
-    $countCb = function() { return 0; };
+    $metaBoxCb = function () {
+        echo 'Meta box content';
+    };
+    $sanitizeCb = function ($value) {
+        return sanitize_text_field($value);
+    };
+    $countCb = function () {
+        return 0;
+    };
 
     $taxonomy = Taxonomy::make('custom_tax', 'post', 'Custom', 'Customs')
         ->metaBoxCb($metaBoxCb)
@@ -164,14 +170,14 @@ test('can use withArgs to set custom arguments', function () {
             'custom_arg' => 'custom_value',
             'another_custom' => true,
             'nested' => [
-                'value' => 'nested_value'
+                'value' => 'nested_value',
             ],
             'capabilities' => [
                 'manage_terms' => 'manage_categories',
                 'edit_terms' => 'manage_categories',
                 'delete_terms' => 'manage_categories',
                 'assign_terms' => 'edit_posts',
-            ]
+            ],
         ]);
 
     $args = $taxonomy->getArgs();

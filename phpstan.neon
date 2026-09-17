@@ -5,6 +5,8 @@ parameters:
         - tests
     excludePaths:
         - vendor/*
+        # WordPress function doubles: analysing them makes PHPStan treat the real functions as side-effect free
+        - tests/Helpers/*
     ignoreErrors:
         # WordPress function mocks in tests
         - '#Function [a-zA-Z0-9\\_]+ not found#'
