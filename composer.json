@@ -2,7 +2,7 @@
     "name": "pollora/entity",
     "description": "A modern PHP package for WordPress custom post types and taxonomies",
     "type": "library",
-    "license": "GPL-2.0-or-later",
+    "license": "MIT",
     "authors": [
         {
             "name": "Amphibee",
