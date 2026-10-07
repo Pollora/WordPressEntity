@@ -1,15 +1,19 @@
-# Pollora Entity WordPress Package
+<p align="center">
+  <a href="https://pollora.dev">
+    <img src="https://raw.githubusercontent.com/Pollora/.github/main/brand/banners/WordPressEntity.png" width="100%" alt="Entity: fluent WordPress post types and taxonomies">
+  </a>
+</p>
 
-A modern PHP 8.2+ library for easily managing WordPress custom post types and taxonomies with a fluent interface and hexagonal architecture.
+<p align="center">
+  <a href="https://packagist.org/packages/pollora/entity"><img src="https://img.shields.io/packagist/v/pollora/entity" alt="Latest version"></a>
+  <a href="https://packagist.org/packages/pollora/entity"><img src="https://img.shields.io/packagist/dt/pollora/entity" alt="Total downloads"></a>
+  <a href="https://github.com/Pollora/WordPressEntity/actions/workflows/tests.yml"><img src="https://github.com/Pollora/WordPressEntity/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Pollora/WordPressEntity" alt="License"></a>
+</p>
 
-## Features
+Entity declares WordPress custom post types and taxonomies with a fluent, typed interface instead of the long argument arrays of `register_post_type()` and `register_taxonomy()`. Each option has its own method, boolean options get dedicated methods (`public()`, `showInRest()`…), and registration is hooked to `init` for you. It is built on [Extended CPTs](https://github.com/johnbillion/extended-cpts), so labels are generated from the singular and plural names, and admin columns and filters are one method away (`adminCols()`, `adminFilters()`).
 
-- 🚀 Modern PHP 8.2+ with type declarations
-- 🏗️ Fluent interface for easy configuration
-- 🔧 Built on top of [Extended CPTs](https://github.com/johnbillion/extended-cpts) library
-- 📐 Hexagonal architecture for better separation of concerns
-- 🧪 Fully tested with PestPHP
-- 💡 Intuitive method naming with dedicated methods for boolean properties
+> Part of [Pollora](https://pollora.dev), the Laravel framework for WordPress. In a Pollora project it is already installed: declare post types and taxonomies with the `#[PostType]` and `#[Taxonomy]` attributes instead, and Pollora registers them through this package.
 
 ## Installation
 
@@ -17,14 +21,11 @@ A modern PHP 8.2+ library for easily managing WordPress custom post types and ta
 composer require pollora/entity
 ```
 
-## Documentation
+Requires PHP 8.2+ and WordPress.
 
-- [Post Types Documentation](docs/post-types.md) - Complete guide for creating and configuring custom post types
-- [Taxonomies Documentation](docs/taxonomies.md) - Complete guide for creating and configuring custom taxonomies
+## Quick start
 
-## Quick Start
-
-### Post Types
+### Post types
 
 ```php
 use Pollora\Entity\PostType;
@@ -48,30 +49,49 @@ Taxonomy::make('genre', 'book', 'Genre', 'Genres')
     ->showInQuickEdit();
 ```
 
+`make()` returns the configured object and registers it on the WordPress `init` hook, so call it before `init` runs (in a plugin's main file or a theme's `functions.php`).
+
+## Features
+
+- Typed, fluent methods for the post type and taxonomy arguments, with dedicated methods for boolean options.
+- Built on [Extended CPTs](https://github.com/johnbillion/extended-cpts).
+- Hexagonal architecture that keeps the domain independent from WordPress.
+- Tested with Pest, with WordPress functions mocked.
+
+## Documentation
+
+- [Post types](docs/post-types.md): creating and configuring custom post types.
+- [Taxonomies](docs/taxonomies.md): creating and configuring custom taxonomies.
+
+In a Pollora project, see [Post types](https://pollora.dev/content/post-types/) and [Taxonomies](https://pollora.dev/content/taxonomies/) on pollora.dev.
+
 ## Architecture
 
-This package follows hexagonal architecture principles:
+The package follows hexagonal architecture principles:
 
-1. **Domain Layer**: Core business logic (Entity, PostType, Taxonomy)
-2. **Application Layer**: Services that orchestrate operations
-3. **Adapter Layer**: WordPress integration adapters
+1. **Domain layer**: the core model (`Entity`, `PostType`, `Taxonomy`).
+2. **Application layer**: services that orchestrate registration.
+3. **Adapter layer**: the WordPress integration adapters.
 
-The Domain layer remains independent of external dependencies, defining interfaces (ports) that adapters implement.
+The domain layer has no external dependencies: it defines interfaces (ports) that the adapters implement.
 
 ## Testing
-
-The package includes comprehensive unit tests using PestPHP with WordPress function mocks:
 
 ```bash
 composer test
 ```
 
-### Test Structure
+This runs the Pest unit tests, PHPStan and Pint. WordPress functions are mocked:
 
-- `tests/helpers.php`: Global WordPress function mocks
-- `tests/ext_cpts_helpers.php`: Extended CPTs namespace function mocks
-- `tests/bootstrap.php`: Test environment setup
+- `tests/Helpers/helpers.php`: global WordPress function mocks
+- `tests/Helpers/ext_cpts_helpers.php`: Extended CPTs namespace function mocks
+- `tests/Helpers/wordpress_args_helpers.php`: mocks for pollora/wordpress-args
+- `tests/bootstrap.php`: test environment setup
+
+## Contributing
+
+Contributions are welcome: see the [contributing guide](https://github.com/Pollora/.github/blob/main/CONTRIBUTING.md). Report security issues privately, as described in the [security policy](https://github.com/Pollora/.github/blob/main/SECURITY.md).
 
 ## License
 
-This package is open-source software licensed under the MIT license. 
+Entity is open-source software licensed under the [MIT license](LICENSE). © [RuBee group](https://rubee.group)
