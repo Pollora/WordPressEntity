@@ -21,7 +21,7 @@ Entity declares WordPress custom post types and taxonomies with a fluent, typed 
 composer require pollora/entity
 ```
 
-Requires PHP 8.2+ and WordPress.
+Requires PHP 8.3+ and WordPress.
 
 ## Quick start
 
