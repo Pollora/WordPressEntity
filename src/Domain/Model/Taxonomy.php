@@ -127,26 +127,6 @@ class Taxonomy extends Entity
     protected string $entity = 'taxonomies';
 
     /**
-     * The slug of the taxonomy.
-     */
-    protected string $slug;
-
-    /**
-     * The singular label for the taxonomy.
-     */
-    protected ?string $singular;
-
-    /**
-     * The plural label for the taxonomy.
-     */
-    protected ?string $plural;
-
-    /**
-     * The post type(s) to associate with this taxonomy.
-     */
-    protected string|array $objectType;
-
-    /**
      * Taxonomy constructor.
      *
      * @param  string  $slug  The slug of the taxonomy.
@@ -155,15 +135,11 @@ class Taxonomy extends Entity
      * @param  string|null  $plural  The plural label for the taxonomy.
      */
     public function __construct(
-        string $slug,
-        string|array $objectType,
-        ?string $singular = null,
-        ?string $plural = null
+        protected string $slug,
+        protected string|array $objectType,
+        protected ?string $singular = null,
+        protected ?string $plural = null
     ) {
-        $this->slug = $slug;
-        $this->objectType = $objectType;
-        $this->singular = $singular;
-        $this->plural = $plural;
         $this->init();
     }
 

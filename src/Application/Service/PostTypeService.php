@@ -9,17 +9,7 @@ use Pollora\Entity\Port\Out\PostTypeRegistryPort;
 
 class PostTypeService
 {
-    private PostTypeRegistryPort $postTypeRegistry;
-
-    private EntityRegistrationService $entityRegistrationService;
-
-    public function __construct(
-        PostTypeRegistryPort $postTypeRegistry,
-        EntityRegistrationService $entityRegistrationService
-    ) {
-        $this->postTypeRegistry = $postTypeRegistry;
-        $this->entityRegistrationService = $entityRegistrationService;
-    }
+    public function __construct(PostTypeRegistryPort $postTypeRegistry, private readonly EntityRegistrationService $entityRegistrationService) {}
 
     public function createPostType(string $slug, string $singular, string $plural): PostType
     {

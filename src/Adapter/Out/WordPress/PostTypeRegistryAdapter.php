@@ -66,13 +66,15 @@ class PostTypeRegistryAdapter implements PostTypeRegistryPort
         }
 
         // Merge names into args
-        if (! empty($names)) {
+        if ($names !== []) {
             if (isset($names['singular'])) {
                 $args['labels']['singular_name'] = $names['singular'];
             }
+
             if (isset($names['plural'])) {
                 $args['labels']['name'] = $names['plural'];
             }
+
             if (isset($names['slug'])) {
                 // Use the slug from names if provided
                 $customSlug = $names['slug'];

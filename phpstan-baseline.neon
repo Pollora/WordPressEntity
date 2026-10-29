@@ -1,0 +1,13 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Constructor of class Pollora\\Entity\\Application\\Service\\PostTypeService has an unused parameter \$postTypeRegistry\.$#'
+			identifier: constructor.unusedParameter
+			count: 1
+			path: src/Application/Service/PostTypeService.php
+
+		-
+			message: '#^Constructor of class Pollora\\Entity\\Application\\Service\\TaxonomyService has an unused parameter \$taxonomyRegistry\.$#'
+			identifier: constructor.unusedParameter
+			count: 1
+			path: src/Application/Service/TaxonomyService.php

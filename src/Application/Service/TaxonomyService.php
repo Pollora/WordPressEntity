@@ -14,23 +14,13 @@ use Pollora\Entity\Port\Out\TaxonomyRegistryPort;
  */
 class TaxonomyService
 {
-    private TaxonomyRegistryPort $taxonomyRegistry;
-
-    private EntityRegistrationService $registrationService;
-
     /**
      * TaxonomyService constructor.
      *
      * @param  TaxonomyRegistryPort  $taxonomyRegistry  The taxonomy registry port implementation
      * @param  EntityRegistrationService  $registrationService  The entity registration service
      */
-    public function __construct(
-        TaxonomyRegistryPort $taxonomyRegistry,
-        EntityRegistrationService $registrationService
-    ) {
-        $this->taxonomyRegistry = $taxonomyRegistry;
-        $this->registrationService = $registrationService;
-    }
+    public function __construct(TaxonomyRegistryPort $taxonomyRegistry, private readonly EntityRegistrationService $registrationService) {}
 
     /**
      * Register a taxonomy with WordPress.
