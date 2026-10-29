@@ -16,19 +16,11 @@ use Pollora\Entity\Port\Out\EntityRegistryPort;
 class EntityRegistrationService
 {
     /**
-     * @var EntityRegistryPort The entity registry port implementation
-     */
-    private EntityRegistryPort $entityRegistry;
-
-    /**
      * EntityRegistrationService constructor.
      *
      * @param  EntityRegistryPort  $entityRegistry  The entity registry port implementation
      */
-    public function __construct(EntityRegistryPort $entityRegistry)
-    {
-        $this->entityRegistry = $entityRegistry;
-    }
+    public function __construct(private readonly EntityRegistryPort $entityRegistry) {}
 
     /**
      * Register an entity with WordPress.
@@ -41,7 +33,7 @@ class EntityRegistrationService
     public function registerEntity(Entity $entity): void
     {
         // Hook the actual registration to WordPress init hook
-        \add_action('init', function () use ($entity) {
+        \add_action('init', function () use ($entity): void {
             $args = $entity->getArgs();
 
             $args['names'] = $entity->getNames();

@@ -1,8 +1,11 @@
+includes:
+    - phpstan-baseline.neon
+    - vendor/pollora/harness/presets/phpstan/base.neon
+
 parameters:
     level: 5
     paths:
         - src
-        - tests
     excludePaths:
         - vendor/*
         # WordPress function doubles: analysing them makes PHPStan treat the real functions as side-effect free

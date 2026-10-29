@@ -62,17 +62,19 @@ class PostTypeRegistryAdapter implements PostTypeRegistryPort
     protected function fallbackToStandardPostTypeRegistration(string $slug, array $args, array $names): void
     {
         if (! function_exists('\\register_post_type')) {
-            throw new \Exception('register_post_type function not found.');
+            throw new WordPressFunctionMissingException('register_post_type function not found.');
         }
 
         // Merge names into args
-        if (! empty($names)) {
+        if ($names !== []) {
             if (isset($names['singular'])) {
                 $args['labels']['singular_name'] = $names['singular'];
             }
+
             if (isset($names['plural'])) {
                 $args['labels']['name'] = $names['plural'];
             }
+
             if (isset($names['slug'])) {
                 // Use the slug from names if provided
                 $customSlug = $names['slug'];

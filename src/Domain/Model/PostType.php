@@ -264,21 +264,6 @@ class PostType extends Entity
     protected string $entity = 'post-types';
 
     /**
-     * The slug of the post type.
-     */
-    protected string $slug;
-
-    /**
-     * The singular label for the post type.
-     */
-    protected ?string $singular;
-
-    /**
-     * The plural label for the post type.
-     */
-    protected ?string $plural;
-
-    /**
      * PostType constructor.
      *
      * @param  string  $slug  The slug of the post type.
@@ -286,13 +271,10 @@ class PostType extends Entity
      * @param  string|null  $plural  The plural label for the post type.
      */
     public function __construct(
-        string $slug,
-        ?string $singular = null,
-        ?string $plural = null
+        protected string $slug,
+        protected ?string $singular = null,
+        protected ?string $plural = null
     ) {
-        $this->slug = $slug;
-        $this->singular = $singular;
-        $this->plural = $plural;
         $this->init();
     }
 

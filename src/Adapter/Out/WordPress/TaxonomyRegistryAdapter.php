@@ -65,17 +65,19 @@ class TaxonomyRegistryAdapter implements TaxonomyRegistryPort
     protected function fallbackToStandardTaxonomyRegistration(string $slug, string|array $objectType, array $args, array $names): void
     {
         if (! function_exists('\\register_taxonomy')) {
-            throw new \Exception('The register_taxonomy function is not available.');
+            throw new WordPressFunctionMissingException('The register_taxonomy function is not available.');
         }
 
         // Merge names into args
-        if (! empty($names)) {
+        if ($names !== []) {
             if (isset($names['singular'])) {
                 $args['labels']['singular_name'] = $names['singular'];
             }
+
             if (isset($names['plural'])) {
                 $args['labels']['name'] = $names['plural'];
             }
+
             if (isset($names['slug'])) {
                 // Use the slug from names if provided
                 $customSlug = $names['slug'];
