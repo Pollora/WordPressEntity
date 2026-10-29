@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "php": "^8.2",
-        "pollora/wordpress-args": "^1.1",
+        "php": "^8.3",
+        "pollora/wordpress-args": "^1.1 || ^2.0",
         "johnbillion/extended-cpts": "^5.0.3"
     },
     "require-dev": {
