@@ -46,6 +46,8 @@ if (! function_exists('esc_html__')) {
 if (! function_exists('register_post_type')) {
     function register_post_type($slug, $args)
     {
+        $GLOBALS['entity_test_registrations'][] = ['register_post_type', $slug, $args];
+
         return true;
     }
 }
@@ -53,6 +55,8 @@ if (! function_exists('register_post_type')) {
 if (! function_exists('register_taxonomy')) {
     function register_taxonomy($slug, $object_type, $args)
     {
+        $GLOBALS['entity_test_registrations'][] = ['register_taxonomy', $slug, $object_type, $args];
+
         return true;
     }
 }
