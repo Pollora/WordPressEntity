@@ -58,6 +58,8 @@ if (! function_exists('ExtCPTs\\add_action')) {
 if (! function_exists('ExtCPTs\\register_post_type')) {
     function register_post_type($post_type, $args = [])
     {
+        $GLOBALS['ext_cpts_registrations'][] = ['post_type', $post_type, $args];
+
         return true; // Simulate successful registration
     }
 }
@@ -65,6 +67,8 @@ if (! function_exists('ExtCPTs\\register_post_type')) {
 if (! function_exists('ExtCPTs\\register_taxonomy')) {
     function register_taxonomy($taxonomy, $object_type, $args = [])
     {
+        $GLOBALS['ext_cpts_registrations'][] = ['taxonomy', $taxonomy, $object_type, $args];
+
         return true; // Simulate successful registration
     }
 }
