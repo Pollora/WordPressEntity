@@ -45,6 +45,7 @@ test('the post type facade registers the post type with WordPress', function () 
 test('the registration service passes args without names and names separately', function () {
     $registry = new class implements EntityRegistryPort
     {
+        /** @var list<array<int, mixed>> */
         public array $calls = [];
 
         public function register(string $slug, array $args, array $names): void
@@ -59,7 +60,7 @@ test('the registration service passes args without names and names separately', 
 
         public function init(): void {}
 
-        public function getArgs(): ?array
+        public function getArgs(): array
         {
             return ['label' => 'Thing'];
         }
@@ -83,6 +84,7 @@ test('the registration service passes args without names and names separately', 
 test('the registration service passes empty names when the translated args drop them', function () {
     $registry = new class implements EntityRegistryPort
     {
+        /** @var list<array<int, mixed>> */
         public array $calls = [];
 
         public function register(string $slug, array $args, array $names): void
@@ -97,7 +99,7 @@ test('the registration service passes empty names when the translated args drop 
 
         public function init(): void {}
 
-        public function getArgs(): ?array
+        public function getArgs(): array
         {
             return ['label' => 'Thing'];
         }
@@ -135,4 +137,22 @@ test('an entity without a slug reports an empty string', function () {
     };
 
     expect($entity->getSlug())->toBe('');
+});
+
+test('a null declaration priority falls back to the declared priority', function (): void {
+    $registry = new class implements EntityRegistryPort
+    {
+        public function register(string $slug, array $args, array $names): void {}
+    };
+    $entity = new class('movie', 'Movie', 'Movies') extends PostTypeDomain
+    {
+        public function getPriority(): ?int
+        {
+            return null;
+        }
+    };
+
+    (new EntityRegistrationService($registry))->registerEntity($entity);
+
+    expect($GLOBALS['entity_test_hook_priorities']['init'])->toBe($entity->priority);
 });
