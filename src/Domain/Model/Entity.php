@@ -31,7 +31,7 @@ abstract class Entity
     /**
      * Labels array for this post type or taxonomy.
      *
-     * @var array
+     * @var array<array-key, mixed>
      */
     public $labels;
 
@@ -69,7 +69,7 @@ abstract class Entity
     /**
      * Rewrites information for this post type or taxonomy.
      *
-     * @var array|false
+     * @var array<array-key, mixed>|false
      */
     public $rewrite;
 
@@ -146,12 +146,14 @@ abstract class Entity
     /**
      * Post type or Taxonomy capabilities.
      *
-     * @var array
+     * @var array<array-key, mixed>
      */
     public $capabilities;
 
     /**
      * Whether to show this post type or taxonomy on the 'At a Glance' section of the admin dashboard.
+     *
+     * @var bool|null
      */
     public $dashboardGlance;
 
@@ -165,7 +167,7 @@ abstract class Entity
     /**
      * Names of the post type or taxonomy.
      *
-     * @var array
+     * @var array<array-key, mixed>
      */
     public $names;
 
@@ -238,9 +240,9 @@ abstract class Entity
     /**
      * Retrieves the labels associated with the entity.
      *
-     * @return array|null Returns an object containing the labels associated with the entity.
-     *                    If labels are available, an array is returned with the label properties.
-     *                    If labels are not available, null is returned.
+     * @return array<array-key, mixed>|null Returns an object containing the labels associated with the entity.
+     *                                      If labels are available, an array is returned with the label properties.
+     *                                      If labels are not available, null is returned.
      */
     public function getLabels(): ?array
     {
@@ -250,7 +252,7 @@ abstract class Entity
     /**
      * Sets the labels for the entity.
      *
-     * @param  array  $labels  The labels array containing the labels for the entity.
+     * @param  array<array-key, mixed>  $labels  The labels array containing the labels for the entity.
      * @return static Returns an instance of the class.
      */
     public function labels(array $labels): self
@@ -265,7 +267,7 @@ abstract class Entity
      *
      * @deprecated Use labels() instead
      *
-     * @param  array  $labels  The labels array containing the labels for the entity.
+     * @param  array<array-key, mixed>  $labels  The labels array containing the labels for the entity.
      * @return static Returns an instance of the class.
      */
     public function setLabels(array $labels): self
@@ -748,7 +750,7 @@ abstract class Entity
     /**
      * Retrieves the value of the rewrite property.
      *
-     * @return bool|array|null The value of the rewrite property.
+     * @return bool|array<array-key, mixed>|null The value of the rewrite property.
      */
     public function getRewrite(): bool|array|null
     {
@@ -758,7 +760,7 @@ abstract class Entity
     /**
      * Sets the value of the rewrite property.
      *
-     * @param  bool|array  $rewrite  The new value for the rewrite property.
+     * @param  bool|array<array-key, mixed>  $rewrite  The new value for the rewrite property.
      * @return static Returns an instance of the current object.
      */
     public function rewrite(bool|array $rewrite): self
@@ -773,7 +775,7 @@ abstract class Entity
      *
      * @deprecated Use withRewrite() instead
      *
-     * @param  bool|array  $rewrite  The new value for the rewrite property.
+     * @param  bool|array<array-key, mixed>  $rewrite  The new value for the rewrite property.
      * @return static Returns an instance of the current object.
      */
     public function withRewrite(bool|array $rewrite): self
@@ -786,7 +788,7 @@ abstract class Entity
      *
      * @deprecated Use rewrite() instead
      *
-     * @param  bool|array  $rewrite  The new value for the rewrite property.
+     * @param  bool|array<array-key, mixed>  $rewrite  The new value for the rewrite property.
      * @return static Returns an instance of the current object.
      */
     public function setRewrite(bool|array $rewrite): self
@@ -1004,7 +1006,7 @@ abstract class Entity
     /**
      * Retrieves the capabilities.
      *
-     * @return array|null The capabilities array, or null if it is not set.
+     * @return array<array-key, mixed>|null The capabilities array, or null if it is not set.
      */
     public function getCapabilities(): ?array
     {
@@ -1014,7 +1016,7 @@ abstract class Entity
     /**
      * Sets the capability for the object.
      *
-     * @param  array  $capabilities  The capability to set.
+     * @param  array<array-key, mixed>  $capabilities  The capability to set.
      * @return static Returns a reference to the object.
      */
     public function capabilities(array $capabilities): self
@@ -1029,7 +1031,7 @@ abstract class Entity
      *
      * @deprecated Use withCapabilities() instead
      *
-     * @param  array  $capabilities  The capability to set.
+     * @param  array<array-key, mixed>  $capabilities  The capability to set.
      * @return static Returns a reference to the object.
      */
     public function withCapabilities(array $capabilities): self
@@ -1042,7 +1044,7 @@ abstract class Entity
      *
      * @deprecated Use capabilities() instead
      *
-     * @param  array  $capabilities  The capability to set.
+     * @param  array<array-key, mixed>  $capabilities  The capability to set.
      * @return static Returns a reference to the object.
      */
     public function setCapabilities(array $capabilities): self
@@ -1179,7 +1181,7 @@ abstract class Entity
     /**
      * Sets the names property with the given array.
      *
-     * @param  array  $names  The names to be set.
+     * @param  array<array-key, mixed>  $names  The names to be set.
      * @return $this The current instance of the class.
      */
     public function names(array $names): self
@@ -1194,7 +1196,7 @@ abstract class Entity
      *
      * @deprecated Use withNames() instead
      *
-     * @param  array  $names  The names to be set.
+     * @param  array<array-key, mixed>  $names  The names to be set.
      * @return $this The current instance of the class.
      */
     public function withNames(array $names): self
@@ -1207,7 +1209,7 @@ abstract class Entity
      *
      * @deprecated Use names() instead
      *
-     * @param  array  $names  The names to be set.
+     * @param  array<array-key, mixed>  $names  The names to be set.
      * @return $this The current instance of the class.
      */
     public function setNames(array $names): self
@@ -1218,7 +1220,7 @@ abstract class Entity
     /**
      * Retrieves the value of the names property.
      *
-     * @return array The value of the names property.
+     * @return array<array-key, mixed> The value of the names property.
      */
     public function getNames(): array
     {
@@ -1288,7 +1290,7 @@ abstract class Entity
     /**
      * Returns the admin columns for the current object.
      *
-     * @return array|null The admin columns array or null if no admin columns are defined.
+     * @return array<array-key, mixed>|null The admin columns array or null if no admin columns are defined.
      */
     public function getAdminCols(): ?array
     {
@@ -1298,7 +1300,7 @@ abstract class Entity
     /**
      * Sets the value of the adminCols property.
      *
-     * @param  array  $adminCols  The value to set for the adminCols property.
+     * @param  array<array-key, mixed>  $adminCols  The value to set for the adminCols property.
      * @return static Returns this object instance.
      */
     public function adminCols(array $adminCols): self
@@ -1313,7 +1315,7 @@ abstract class Entity
      *
      * @deprecated Use withAdminCols() instead
      *
-     * @param  array  $adminCols  The value to set for the adminCols property.
+     * @param  array<array-key, mixed>  $adminCols  The value to set for the adminCols property.
      * @return static Returns this object instance.
      */
     public function withAdminCols(array $adminCols): self
@@ -1326,7 +1328,7 @@ abstract class Entity
      *
      * @deprecated Use adminCols() instead
      *
-     * @param  array  $adminCols  The value to set for the adminCols property.
+     * @param  array<array-key, mixed>  $adminCols  The value to set for the adminCols property.
      * @return static Returns this object instance.
      */
     public function setAdminCols(array $adminCols): self
@@ -1392,7 +1394,7 @@ abstract class Entity
     /**
      * Get the arguments for the entity.
      *
-     * @return array|null The arguments for the entity.
+     * @return array<array-key, mixed>|null The arguments for the entity.
      */
     public function getArgs(): ?array
     {

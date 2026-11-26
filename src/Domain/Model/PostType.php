@@ -168,7 +168,7 @@ class PostType extends Entity
      * @link https://developer.wordpress.org/block-editor/developers/block-api/block-templates/
      * @since 5.0.0
      *
-     * @var array[]
+     * @var array<array-key, mixed>
      */
     public $template;
 
@@ -194,7 +194,7 @@ class PostType extends Entity
      *
      * @since 4.6.0
      *
-     * @var array|bool
+     * @var array<array-key, mixed>|bool
      */
     public $supports;
 
@@ -217,16 +217,22 @@ class PostType extends Entity
      * admin dashboard.
      *
      * Default true.
+     *
+     * @var bool|null
      */
     public $dashboardActivity;
 
     /**
      * Placeholder text which appears in the title field for this post type.
+     *
+     * @var string|null
      */
     public $enterTitleHere;
 
     /**
      * Text which replaces the 'Featured Image' phrase for this post type.
+     *
+     * @var string|null
      */
     public $featuredImage;
 
@@ -234,6 +240,8 @@ class PostType extends Entity
      * Whether to show Quick Edit links for this post type.
      *
      * Default true.
+     *
+     * @var bool|null
      */
     public $quickEdit;
 
@@ -241,6 +249,8 @@ class PostType extends Entity
      * Whether to include this post type in the site's main feed.
      *
      * Default false.
+     *
+     * @var bool|null
      */
     public $showInFeed;
 
@@ -719,7 +729,7 @@ class PostType extends Entity
      *
      * This method returns the taxonomies stored in the current instance.
      *
-     * @return array|null The taxonomies or null if not set.
+     * @return array<array-key, mixed>|null The taxonomies or null if not set.
      */
     public function getTaxonomies(): ?array
     {
@@ -729,7 +739,7 @@ class PostType extends Entity
     /**
      * Set the taxonomies for this object.
      *
-     * @param  array  $taxonomies  An array of taxonomies to set.
+     * @param  array<array-key, mixed>  $taxonomies  An array of taxonomies to set.
      * @return self Returns itself after setting the taxonomies.
      */
     public function taxonomies(array $taxonomies): self
@@ -744,7 +754,7 @@ class PostType extends Entity
      *
      * @deprecated Use taxonomies() instead
      *
-     * @param  array  $taxonomies  An array of taxonomies to set.
+     * @param  array<array-key, mixed>  $taxonomies  An array of taxonomies to set.
      * @return self Returns itself after setting the taxonomies.
      */
     public function setTaxonomies(array $taxonomies): self
@@ -951,7 +961,7 @@ class PostType extends Entity
     /**
      * Retrieves the template for the site.
      *
-     * @return array|null The template for the site, or null if none is set.
+     * @return array<array-key, mixed>|null The template for the site, or null if none is set.
      */
     public function getTemplate(): ?array
     {
@@ -961,7 +971,7 @@ class PostType extends Entity
     /**
      * Sets the template for the object.
      *
-     * @param  array  $template  The template to set.
+     * @param  array<array-key, mixed>  $template  The template to set.
      * @return self Returns the object itself for method chaining.
      */
     public function template(array $template): self
@@ -976,7 +986,7 @@ class PostType extends Entity
      *
      * @deprecated Use template() instead
      *
-     * @param  array  $template  The template to set.
+     * @param  array<array-key, mixed>  $template  The template to set.
      * @return self Returns the object itself for method chaining.
      */
     public function setTemplate(array $template): self
@@ -1026,8 +1036,8 @@ class PostType extends Entity
     /**
      * Retrieves the supports for the current object.
      *
-     * @return bool|array|null The supports for the current object. This will either be a boolean value, an array,
-     *                         or null if no supports are set.
+     * @return bool|array<array-key, mixed>|null The supports for the current object. This will either be a boolean value, an array,
+     *                                           or null if no supports are set.
      */
     public function getSupports(): bool|array|null
     {
@@ -1037,7 +1047,7 @@ class PostType extends Entity
     /**
      * Sets the support options for the site.
      *
-     * @param  bool|array  $supports  The support options, can be a boolean value or an array of options.
+     * @param  bool|array<array-key, mixed>  $supports  The support options, can be a boolean value or an array of options.
      * @return self The updated instance of the class.
      */
     public function supports(bool|array $supports): self
@@ -1052,7 +1062,7 @@ class PostType extends Entity
      *
      * @deprecated Use supports() instead
      *
-     * @param  bool|array  $supports  The support options, can be a boolean value or an array of options.
+     * @param  bool|array<array-key, mixed>  $supports  The support options, can be a boolean value or an array of options.
      * @return self The updated instance of the class.
      */
     public function setSupports(bool|array $supports): self
@@ -1063,7 +1073,7 @@ class PostType extends Entity
     /**
      * Retrieves the admin filters for the site.
      *
-     * @return array|null The admin filters for the site, or null if none are set.
+     * @return array<array-key, mixed>|null The admin filters for the site, or null if none are set.
      */
     public function getAdminFilters(): ?array
     {
@@ -1073,7 +1083,7 @@ class PostType extends Entity
     /**
      * Sets the admin filters for the site.
      *
-     * @param  array  $adminFilters  The admin filters to be set.
+     * @param  array<array-key, mixed>  $adminFilters  The admin filters to be set.
      * @return self Returns the current object instance.
      */
     public function adminFilters(array $adminFilters): self
@@ -1086,7 +1096,7 @@ class PostType extends Entity
     /**
      * Retrieves the archive for the site.
      *
-     * @return array|null The archive for the site, or null if none is set.
+     * @return array<array-key, mixed>|null The archive for the site, or null if none is set.
      */
     public function getArchive(): ?array
     {
@@ -1096,7 +1106,7 @@ class PostType extends Entity
     /**
      * Sets the archive for the site.
      *
-     * @param  array  $archive  The archive to set.
+     * @param  array<array-key, mixed>  $archive  The archive to set.
      * @return self The updated instance of the class.
      */
     public function archive(array $archive): self
@@ -1111,7 +1121,7 @@ class PostType extends Entity
      *
      * @deprecated Use archive() instead
      *
-     * @param  array  $archive  The archive to set.
+     * @param  array<array-key, mixed>  $archive  The archive to set.
      * @return self The updated instance of the class.
      */
     public function setArchive(array $archive): self
@@ -1458,7 +1468,7 @@ class PostType extends Entity
     /**
      * Retrieves the site filters.
      *
-     * @return array|null The site filters, if available; otherwise null.
+     * @return array<array-key, mixed>|null The site filters, if available; otherwise null.
      */
     public function getSiteFilters(): ?array
     {
@@ -1468,7 +1478,7 @@ class PostType extends Entity
     /**
      * Set the site filters.
      *
-     * @param  array  $siteFilters  The array containing site filters.
+     * @param  array<array-key, mixed>  $siteFilters  The array containing site filters.
      * @return self The current object with the updated site filters.
      */
     public function siteFilters(array $siteFilters): self
@@ -1481,7 +1491,7 @@ class PostType extends Entity
     /**
      * Retrieves the sortables for the site.
      *
-     * @return array|null The sortables for the site, or null if none are set.
+     * @return array<array-key, mixed>|null The sortables for the site, or null if none are set.
      */
     public function getSiteSortables(): ?array
     {
@@ -1491,7 +1501,7 @@ class PostType extends Entity
     /**
      * Set the site sortables.
      *
-     * @param  array  $siteSortables  The array of site sortables.
+     * @param  array<array-key, mixed>  $siteSortables  The array of site sortables.
      * @return self The current instance of the object.
      */
     public function siteSortables(array $siteSortables): self

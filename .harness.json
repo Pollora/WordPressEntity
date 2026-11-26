@@ -5,10 +5,10 @@
         "framework"
     ],
     "ratchet": {
-        "type_coverage": 89.1,
-        "phpstan_level": 5,
+        "phpstan_level": 6,
         "phpstan_baseline": 2,
-        "coverage": 98.0,
+        "coverage": 98,
+        "type_coverage": 89.1,
         "msi": 95
     }
 }

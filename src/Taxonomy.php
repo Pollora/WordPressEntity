@@ -21,7 +21,7 @@ class Taxonomy
      * Create a new taxonomy.
      *
      * @param  string  $slug  The slug of the taxonomy.
-     * @param  string|array  $objectType  The post type(s) to associate with this taxonomy.
+     * @param  string|array<array-key, mixed>  $objectType  The post type(s) to associate with this taxonomy.
      * @param  string|null  $singular  The singular label for the taxonomy.
      * @param  string|null  $plural  The plural label for the taxonomy.
      * @return TaxonomyDomain The created taxonomy domain model.
