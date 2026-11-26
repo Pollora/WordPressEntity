@@ -13,8 +13,8 @@ interface PostTypeRegistryPort extends EntityRegistryPort
      * Registers a post type with WordPress.
      *
      * @param  string  $slug  The post type slug
-     * @param  array  $args  Registration arguments
-     * @param  array  $names  Post type names (singular, plural)
+     * @param  array<array-key, mixed>  $args  Registration arguments
+     * @param  array<array-key, mixed>  $names  Post type names (singular, plural)
      */
     public function registerPostType(string $slug, array $args, array $names): void;
 }

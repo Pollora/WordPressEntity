@@ -43,7 +43,7 @@ class Taxonomy extends Entity
      *
      * @since 4.7.0
      *
-     * @var bool|callable
+     * @var bool|callable|null
      */
     public $metaBoxCb;
 
@@ -52,7 +52,7 @@ class Taxonomy extends Entity
      *
      * @since 5.1.0
      *
-     * @var callable
+     * @var callable|null
      */
     public $metaBoxSanitizeCb;
 
@@ -71,7 +71,7 @@ class Taxonomy extends Entity
      *
      * @since 5.5.0
      *
-     * @var array|string
+     * @var array<array-key, mixed>|string
      */
     public $defaultTerm;
 
@@ -91,7 +91,7 @@ class Taxonomy extends Entity
      *
      * @since 2.6.0
      *
-     * @var array|null
+     * @var array<array-key, mixed>|null
      */
     public $args;
 
@@ -99,6 +99,8 @@ class Taxonomy extends Entity
      * This allows you to override WordPress' default behaviour if necessary.
      *
      * Default false if you're using a custom meta box (see the `$meta_box` argument), default true otherwise.
+     *
+     * @var bool|null
      */
     public $checkedOntop;
 
@@ -111,6 +113,8 @@ class Taxonomy extends Entity
      * post, but rather each post can exclusively have only one term. It's not feature
      * complete because you can edit a post in Quick Edit and give it more than one term
      * from the taxonomy.
+     *
+     * @var bool|null
      */
     public $exclusive;
 
@@ -118,6 +122,8 @@ class Taxonomy extends Entity
      * All this does currently is disable hierarchy in the taxonomy's rewrite rules.
      *
      * Default false.
+     *
+     * @var bool|null
      */
     public $allowHierarchy;
 
@@ -130,7 +136,7 @@ class Taxonomy extends Entity
      * Taxonomy constructor.
      *
      * @param  string  $slug  The slug of the taxonomy.
-     * @param  string|array  $objectType  The post type(s) to associate with this taxonomy.
+     * @param  string|array<array-key, mixed>  $objectType  The post type(s) to associate with this taxonomy.
      * @param  string|null  $singular  The singular label for the taxonomy.
      * @param  string|null  $plural  The plural label for the taxonomy.
      */
@@ -149,7 +155,7 @@ class Taxonomy extends Entity
      * Factory method to create a new taxonomy.
      *
      * @param  string  $slug  The slug to set.
-     * @param  string|array  $objectType  The post type(s) to be associated.
+     * @param  string|array<array-key, mixed>  $objectType  The post type(s) to be associated.
      * @param  string|null  $singular  (Optional) The singular label.
      * @param  string|null  $plural  (Optional) The plural form of the label.
      * @return self Returns a new instance of the class.
@@ -192,7 +198,7 @@ class Taxonomy extends Entity
     /**
      * Gets the object type(s) associated with this taxonomy.
      *
-     * @return string|array The object type(s)
+     * @return string|array<array-key, mixed> The object type(s)
      */
     public function getObjectType(): string|array
     {
@@ -492,8 +498,8 @@ class Taxonomy extends Entity
     /**
      * Retrieves the default term value.
      *
-     * @return array|string|null The default term value. If a default term is set, it will be returned as an array,
-     *                           otherwise it can be null or a string.
+     * @return array<array-key, mixed>|string|null The default term value. If a default term is set, it will be returned as an array,
+     *                                             otherwise it can be null or a string.
      */
     public function getDefaultTerm(): array|string|null
     {
@@ -503,7 +509,7 @@ class Taxonomy extends Entity
     /**
      * Sets the default term for the taxonomy.
      *
-     * @param  array|string  $defaultTerm  The default term for the taxonomy. Can be either an array or a string.
+     * @param  array<array-key, mixed>|string  $defaultTerm  The default term for the taxonomy. Can be either an array or a string.
      * @return self The current instance of the Taxonomy object.
      */
     public function defaultTerm(array|string $defaultTerm): self
@@ -518,7 +524,7 @@ class Taxonomy extends Entity
      *
      * @deprecated Use defaultTerm() instead
      *
-     * @param  array|string  $defaultTerm  The default term for the taxonomy. Can be either an array or a string.
+     * @param  array<array-key, mixed>|string  $defaultTerm  The default term for the taxonomy. Can be either an array or a string.
      * @return self The current instance of the Taxonomy object.
      */
     public function setDefaultTerm(array|string $defaultTerm): self
@@ -591,7 +597,7 @@ class Taxonomy extends Entity
     /**
      * Set the arguments for the taxonomy.
      *
-     * @param  array|null  $args  The arguments for the taxonomy.
+     * @param  array<array-key, mixed>|null  $args  The arguments for the taxonomy.
      * @return self Returns the updated Taxonomy object.
      */
     public function args(?array $args): self
@@ -606,7 +612,7 @@ class Taxonomy extends Entity
      *
      * @deprecated Use args() instead
      *
-     * @param  array|null  $args  The arguments for the taxonomy.
+     * @param  array<array-key, mixed>|null  $args  The arguments for the taxonomy.
      * @return self Returns the updated Taxonomy object.
      */
     public function setArgs(?array $args): self

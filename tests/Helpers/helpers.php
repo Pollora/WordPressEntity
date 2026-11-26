@@ -8,6 +8,9 @@ use Pollora\Entity\Domain\Model\Taxonomy;
 if (! function_exists('add_action')) {
     function add_action($hook, $callback, $priority = 10, $accepted_args = 1)
     {
+        // Kept for the tests that look at the priority a hook is registered with
+        $GLOBALS['entity_test_hook_priorities'][$hook] = $priority;
+
         // Execute the callback immediately to simulate WordPress hook
         if ($hook === 'init') {
             $callback();

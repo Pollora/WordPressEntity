@@ -16,8 +16,8 @@ interface EntityRegistryPort
      * Registers an entity with WordPress.
      *
      * @param  string  $slug  The entity slug
-     * @param  array  $args  Registration arguments
-     * @param  array  $names  Entity names (singular, plural)
+     * @param  array<array-key, mixed>  $args  Registration arguments
+     * @param  array<array-key, mixed>  $names  Entity names (singular, plural)
      */
     public function register(string $slug, array $args, array $names): void;
 }
