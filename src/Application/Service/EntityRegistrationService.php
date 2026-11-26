@@ -44,6 +44,6 @@ class EntityRegistrationService
 
             $this->entityRegistry->register($entity->getSlug(), $args, $names);
 
-        }, $entity->getPriority());
+        }, $entity->getPriority() ?? $entity->priority);
     }
 }

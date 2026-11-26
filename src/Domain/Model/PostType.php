@@ -19,7 +19,7 @@ class PostType extends Entity
      *
      * @since 4.6.0
      *
-     * @var bool
+     * @var bool|null
      */
     public $excludeFromSearch;
 
@@ -30,7 +30,7 @@ class PostType extends Entity
      *
      * @since 4.6.0
      *
-     * @var int
+     * @var int|null
      */
     public $menuPosition;
 
@@ -46,7 +46,7 @@ class PostType extends Entity
      *
      * @since 4.6.0
      *
-     * @var string
+     * @var string|null
      */
     public $menuIcon;
 
@@ -57,7 +57,7 @@ class PostType extends Entity
      *
      * @since 4.6.0
      *
-     * @var bool
+     * @var bool|null
      */
     public $showInAdminBar;
 
@@ -92,7 +92,7 @@ class PostType extends Entity
      *
      * @since 4.6.0
      *
-     * @var callable
+     * @var callable|null
      */
     public $registerMetaBoxCb;
 
@@ -143,7 +143,7 @@ class PostType extends Entity
      *
      * @since 4.6.0
      *
-     * @var bool
+     * @var bool|null
      */
     public $deleteWithUser;
 
@@ -185,7 +185,7 @@ class PostType extends Entity
      * @link https://developer.wordpress.org/block-editor/developers/block-api/block-templates/
      * @since 5.0.0
      *
-     * @var string|false
+     * @var bool|string
      */
     public $templateLock;
 

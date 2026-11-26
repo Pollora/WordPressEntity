@@ -43,7 +43,7 @@ class Taxonomy extends Entity
      *
      * @since 4.7.0
      *
-     * @var bool|callable
+     * @var bool|callable|null
      */
     public $metaBoxCb;
 
@@ -52,7 +52,7 @@ class Taxonomy extends Entity
      *
      * @since 5.1.0
      *
-     * @var callable
+     * @var callable|null
      */
     public $metaBoxSanitizeCb;
 

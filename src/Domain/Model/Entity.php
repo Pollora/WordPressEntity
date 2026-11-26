@@ -55,7 +55,7 @@ abstract class Entity
     /**
      * Whether queries can be performed on the front end for the post type as part of `parse_request()` for post types or whether a taxonomy is intended for use publicly either via the admin interface or by front-end users
      *
-     * @var bool
+     * @var bool|null
      */
     public $publiclyQueryable;
 
@@ -69,7 +69,7 @@ abstract class Entity
     /**
      * Rewrites information for this post type or taxonomy.
      *
-     * @var array<array-key, mixed>|false
+     * @var bool|array<array-key, mixed>
      */
     public $rewrite;
 
@@ -78,7 +78,7 @@ abstract class Entity
      *
      * Default is the value of $public.
      *
-     * @var bool
+     * @var bool|null
      */
     public $showUi;
 
@@ -94,7 +94,7 @@ abstract class Entity
      *
      * Default is the value $public.
      *
-     * @var bool
+     * @var bool|null
      */
     public $showInNavMenus;
 
